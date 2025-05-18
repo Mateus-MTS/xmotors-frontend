@@ -1,8 +1,5 @@
 /* ---------------------------------------------------------
-    * Name: Motorx
-    * Version: 1.0.0
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
+    * Source: http://themesflat.com 
 
 	* Abstracts variable
     
@@ -15,8 +12,8 @@
 
     * Pages
         * home 
-	
  ------------------------------------------------------------------------------ */
+
  /*--------- Animation ---------- */
  @use "/public/assets/css/animation.css";
 
@@ -46,7 +43,7 @@
  @use "reset";
  
  /*------------ Components ---------------- */
- @use "./component/index";
+ @use "../../components/index";
  
  /*--------------- widget ---------------- */
  @use "widgets";

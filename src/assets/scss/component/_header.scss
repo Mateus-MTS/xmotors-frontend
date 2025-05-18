@@ -118,7 +118,13 @@
 }
 
 
-/* Main Menu */
+/*** 
+
+====================================================================
+	Main Menu
+====================================================================
+
+***/
 
 .main-header .main-menu {
 	position: relative;
@@ -153,7 +159,13 @@
 	margin-top: 40px;
 }
 
-/*Sticky Header*/
+/*** 
+
+====================================================================
+	Cabeçalho Fixo
+====================================================================
+
+***/
 
 .main-header .sticky-header {
 	position: fixed;
@@ -547,16 +559,6 @@
 	opacity: 1;
 	visibility: visible;
 }
-
-// .main-header .main-menu .navigation > li.dropdown2 > a::after {
-//     content: "\e981";
-//     font-family: "icomoon";
-//     font-weight: 900;
-// 	font-size: 11px;
-//     margin-left: 5px;
-//     vertical-align: bottom;
-
-// }
 
 .main-header .main-menu .navbar-collapse>ul li.dropdown2 .dropdown2-btn {
 	position: absolute;

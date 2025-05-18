@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import Slide from './components/slide.jsx';
+import './_index.scss';
+import Slide from './Slide/slide.jsx';
+import Filter from './Filter/filter.jsx';
 
 function App() {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -72,54 +74,6 @@ function App() {
   return (
     <>
       <header id="header3" className={`main-header header header-fixed ${mobileMenuVisible ? 'mobile-menu-visible' : ''}`}>
-        {/* Start Header Top Bar */}
-        <div className="top-bar">
-          <div className="themesflat-container">
-            <div className="row">
-              <div className="col-md-9">
-                <ul className="list-infor-topbar">
-                  <li>
-                    <a href="#">
-                      <i className="icon-Group-11"></i>
-                      <p>Linha Direta: (54) 98163-3187</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="icon-Group3"></i>
-                      <p>Contate-nos: mateusvilarinodoprado@outlook.com</p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-md-3">
-                <ul className="icon-topbar">
-                  <li>
-                    <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-                      <i className="icon-6"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-                      <i className="icon-4"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-label="Vimeo" target="_blank" rel="noopener noreferrer">
-                      <i className="icon-5"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">
-                      <i className="icon-7"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="header-lower">
           <div className="themesflat-container">
             <div className="row">
@@ -267,6 +221,7 @@ function App() {
 
       <main>
         <Slide />
+        <Filter />
       </main>
     </>
   );

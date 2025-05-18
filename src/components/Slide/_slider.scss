@@ -1,5 +1,5 @@
-@use '../abstracts/mixin';
-@use '../abstracts/variable';
+@use '../../assets/scss/abstracts/mixin';
+@use '../../assets/scss/abstracts/variable';
 
 /*------------ Slider ---------------- */
 .widget-tf-slider {
@@ -59,7 +59,7 @@
                 & .slide-content {
                     max-width: 550px;
                     width: 100%;
-                    padding-top: 129px;
+                    padding-top: 85px;
 
                     & .sub-title {
                         font-size: 16px;

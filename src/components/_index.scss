@@ -1,23 +1,23 @@
 /*------------ Header Style 01 ---------------- */
-@use "header";
+@use "../assets/scss/component/header";
 
 /*------------ Footer Style 01 ---------------- */
-@use "footer";
+@use ".././assets/scss/component/footer";
 
 /*------------ Button ---------------- */
-@use "button";
+@use ".././assets/scss/component/button";
 
 /*------------ Panigation ---------------- */
-@use "panigation";
+@use ".././assets/scss/component/panigation";
 
 /*------------ Social Icon ---------------- */
-@use "social-icon";
+@use ".././assets/scss/component/social-icon";
 
 /*------------ SideBar Blog ---------------- */
-@use "sidebar-blog";
+@use ".././assets/scss/component/sidebar-blog";
 
 /*------------ Search Form ---------------- */
-@use "search-form";
+@use "./Filter/search-form";
 
 /*------------ Slider ---------------- */
-@use "slider";
+@use "./Slide/slider";
