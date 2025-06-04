@@ -51,7 +51,7 @@ function Slide() {
                                     className="icon-shape wow swing"
                                     alt="Ícone decorativo" />
 
-                                <BoxOffer/>
+                                <BoxOffer />
                                 <BoxCar showContentPrice={showContentPrice} onIconClick={handleIconClick} /> {/* Passa o estado para BoxCar */}
                             </div>
                             {/* <div className="box">
@@ -82,9 +82,9 @@ function BoxCar({ showContentPrice, onIconClick }) {
         <div className="box-car">
             <img src="/assets/images/slide/car.png" alt="Imagem de um carro de luxo" />
             <div className="dot-car">
-            <div className="dot">
+                <div className="dot">
                     <i
-                        className="icon-Vector-5"
+                        className={`icon-Vector-5 ${showContentPrice ? 'active' : ''}`}
                         onClick={onIconClick} // Adiciona o manipulador de clique ao ícone
                         style={{ cursor: 'pointer' }}
                     ></i>
