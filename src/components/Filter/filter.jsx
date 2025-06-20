@@ -1,22 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import noUiSlider from 'nouislider';
-import wNumb from 'wnumb';
-import 'nouislider/dist/nouislider.css';
+import { useState } from 'react';
+import RangeSlider from './RangeSlider';
+import GeoLocation from './GeoLocationFilterAutocomplete';
 
 function Filter() {
     const [selectedVehicle, setSelectedVehicle] = useState('3'); // Estado para o veículo selecionado
-
-    const handleIconClick = (value) => {
-        setSelectedVehicle(value); // Atualiza o veículo selecionado
-    };
-
-    // Dados dos ícones para mapeamento
-    const vehicleIcons = [
-        { value: '1', iconClass: 'icon-car-auto', label: 'Auto' },
-        { value: '2', iconClass: 'icon-car-moped', label: 'Moto' },
-        { value: '3', iconClass: 'icon-car-kamion', label: 'Caminhão' },
-        { value: '4', iconClass: 'icon-car-bus', label: 'Ônibus' }
-    ];
 
     return (
         <>
@@ -26,20 +13,27 @@ function Filter() {
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                    aria-selected="true">Todos</button>
+                                    data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                                    Todos
+                                </button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link" id="region-tab" data-bs-toggle="tab" data-bs-target="#region"
-                                    type="button" role="tab" aria-controls="region" aria-selected="false">Novos</button>
+                                    type="button" role="tab" aria-controls="region" aria-selected="false">
+                                    Novos
+                                </button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link" id="region-tab" data-bs-toggle="tab" data-bs-target="#region"
-                                    type="button" role="tab" aria-controls="region" aria-selected="false">Usados</button>
+                                    type="button" role="tab" aria-controls="region" aria-selected="false">
+                                    Usados
+                                </button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link" id="region-tab" data-bs-toggle="tab" data-bs-target="#region"
-                                    type="button" role="tab" aria-controls="region" aria-selected="false">Antigos</button>
+                                    type="button" role="tab" aria-controls="region" aria-selected="false">
+                                    Antigos
+                                </button>
                             </li>
                         </ul>
 
@@ -138,22 +132,12 @@ function RenderTabHome() {
                     <div className="form-group">
                         <div className="group-select">
                             <div className="nice-select" tabIndex="0">
-                                <span className="current">Marcas</span>
+                                <span className="current">UF</span>
                                 <ul className="list">
-                                    <li data-value className="option selected">Marcas</li>
-                                    <li data-value="Chevrolet - GM" className="option">Chevrolet - GM</li>
-                                    <li data-value="Volkswagen" className="option">Volkswagen</li>
-                                    <li data-value="Ford" className="option">Ford</li>
-                                    <li data-value="Fiat" className="option">Fiat</li>
-                                    <li data-value="Peugeot" className="option">Peugeot</li>
-                                    <li data-value="Renault" className="option">Renault</li>
-                                    <li data-value="Citroen" className="option">Citroen</li>
-                                    <li data-value="Toyota" className="option">Toyota</li>
-                                    <li data-value="Kia" className="option">Kia</li>
-                                    <li data-value="Mitsubishi" className="option">Mitsubishi</li>
-                                    <li data-value="Nissan" className="option">Nissan</li>
-                                    <li data-value="Tesla" className="option">Tesla</li>
-                                    <li data-value="Byd" className="option">Byd</li>
+                                    <li data-value className="option selected">UF</li>
+                                    <li data-value="RS" className="option">RS</li>
+                                    <li data-value="SC" className="option">SC</li>
+                                    <li data-value="PR" className="option">PR</li>
                                 </ul>
                             </div>
                         </div>
@@ -161,41 +145,33 @@ function RenderTabHome() {
                     <div className="form-group">
                         <div className="group-select">
                             <div className="nice-select" tabIndex="0">
-                                <span className="current">Modelos</span>
+                                <span className="current">Cidade</span>
                                 <ul className="list">
-                                    <li data-value className="option selected">Modelos</li>
-                                    <li data-value="3 Series" className="option">3 Series</li>
-                                    <li data-value="718 Boxster T" className="option">718 Boxster T</li>
-                                    <li data-value="718 Cayman" className="option">718 Cayman</li>
-                                    <li data-value="911 Carrera 4" className="option">911 Carrera 4</li>
-                                    <li data-value="A4" className="option">A4</li>
-                                    <li data-value="Bentayga" className="option">Bentayga</li>
-                                    <li data-value="Bentayga Azure" className="option">Bentayga Azure</li>
-                                    <li data-value="Bentayga Technology" className="option">Bentayga Technology</li>
-                                    <li data-value="C className" className="option">C className</li>
+                                    <li data-value className="option selected">Cidade</li>
+                                    <li data-value="Caxias do Sul" className="option">Caxias do Sul</li>
+                                    <li data-value="Farroupilha" className="option">Farroupilha</li>
+                                    <li data-value="Flores da Cunha" className="option">Flores da Cunha</li>
+                                    <li data-value="Bento Gonçalves" className="option">Bento Gonçalves</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="widget widget-price">
-                            <div className="caption flex-two">
-                                <p className="price-range">Preço</p>
-                            </div>
-                            <div id="slider-range"></div>
-                            <div className="slider-labels">
-                                <div>
-                                    <input type="hidden" name="min-value" value="" />
-                                    <input type="hidden" name="max-value" value="" />
-                                </div>
-                                <div className="number-range">
-                                    <span id="slider-range-value1"></span>
-                                    <span id="slider-range-value2"></span>
-                                </div>
-                            </div>
+                        <div>
+                            {/* Outros elementos */}
+                            <RangeSlider />
+                            {/* Mais elementos */}
                         </div>
                         {/* <!-- /.widget_price --> */}
                     </div>
+                    <div className="form-group">
+                        <div>
+                            <RangeSlider />
+                        </div>
+                    </div>
+
+                    <GeoLocation/>
+
                     <div className="form-group">
                         <button type="submit" className="button-search-listing">
                             <i className="icon-search-1"></i>
@@ -207,61 +183,5 @@ function RenderTabHome() {
         </div>
     );
 }
-
-const RangeSlider = () => {
-  const sliderRef = useRef(null);
-  const [values, setValues] = useState([1000, 500000]);
-  const [handleWidth, setHandleWidth] = useState(null);
-
-  useEffect(() => {
-    const moneyFormat = wNumb({
-      decimals: 0,
-      thousand: ','
-    });
-
-    noUiSlider.create(sliderRef.current, {
-      start: values,
-      step: 1,
-      range: {
-        'min': [0],
-        'max': [1000000]
-      },
-      format: moneyFormat,
-      connect: true
-    });
-
-    const slider = sliderRef.current.noUiSlider;
-
-    slider.on('update', (values, handle) => {
-      const numericValues = values.map(val => moneyFormat.from(val));
-      setValues(numericValues);
-    });
-
-    return () => {
-      slider.destroy();
-    };
-  }, []);
-
-  const handleClick = () => {
-    setHandleWidth('50px');
-  };
-
-  return (
-    <div>
-      <div 
-        ref={sliderRef} 
-        id="slider-range"
-        style={{ '--handle-width': handleWidth }}
-      ></div>
-      
-      <div>
-        {values[0]} - {values[1]}
-      </div>
-      
-      <input type="hidden" name="min-value" value={values[0]} />
-      <input type="hidden" name="max-value" value={values[1]} />
-    </div>
-  );
-};
 
 export default Filter;

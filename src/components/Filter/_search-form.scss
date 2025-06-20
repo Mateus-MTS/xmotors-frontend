@@ -212,32 +212,28 @@
   cursor: inherit !important;
 }
 
-.noUi-base,
-.noUi-handle {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
+// 📐 responsividade 
+// área clicavel para arrastar o slider
 .noUi-horizontal {
-  height: 3px;
+  height: 4px;
 }
 
 .noUi-horizontal .noUi-handle {
-  position: relative;
+  position: absolute;
   width: 15px;
-  height: 15px;
-  left: -7.5px !important;
-  right: 0px !important;
-  top: -5.5px;
+  height: 10px;
+  top: -4px;
   background-color: variable.$white;
   border: 1.5px solid variable.$primary;
   border-radius: 100px;
   cursor: pointer;
+  transform: translateX(-8px);
 }
 
+// 🎨 Contraste visual 
 /* Styling; */
 .noUi-background {
-  background: #EBEBEB;
+  background: #e0e0e0;
 }
 
 .noUi-connect {
@@ -253,12 +249,8 @@
 .noUi-target {
   width: 100%;
   height: 7px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-}
-
-.noUi-horizontal .noUi-handle.noUi-handle-upper {
-  left: -7px;
+  border-radius: 12px;
+  margin-bottom: 16px;
 }
 
 /* Handles and cursors;*/
@@ -285,8 +277,12 @@
   }
 }
 
+// ♿ acessibilidade visual do foco/hover
+.noUi-handle:focus,
 .noUi-handle:active {
+  outline: none;
   border: 1px solid variable.$primary;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Disabled state; */
@@ -300,32 +296,105 @@
   cursor: not-allowed;
 }
 
+// 📦 Organização visual das labels de faixa
 .slider-labels .caption {
   font-weight: 500;
   font-size: 16px;
 }
 
 .slider-labels {
+  margin-bottom: 10px;
+
   & .number-range {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+    font-size: 14px;
+
+    & input {
+      width: 100%;
+      padding: 4px 4px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+    }
 
     & span {
-      padding: 5px 10px;
-      background-color: #F5F5F5;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 16.38px;
-      color: #888B95;
-      border: unset;
-      width: auto;
+      width: 10px;
+      margin: 4px;
+      max-width: 10px;
       text-align: center;
     }
   }
 }
+
+/* Geolocalização - textbox */
+.geo-autocomplete {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+
+    &:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    }
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    padding: 4px 0;
+
+    li {
+      padding: 10px 12px;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f0f4f8;
+      }
+
+      &:active {
+        background-color: #e6effc;
+      }
+    }
+  }
+
+  .loading {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #777;
+  }
+
+  .error {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #d9534f;
+  }
+}
+
+
+
 
 /* Container principal dos ícones de categoria - alinhado à direita */
 
@@ -361,7 +430,8 @@
         align-items: center;
         gap: 0.5rem;
 
-        i, svg {
+        i,
+        svg {
           font-size: 2.5rem;
           color: #0A1C26;
           transition: all 0.2s ease;
@@ -380,10 +450,13 @@
 
       &:hover:not(.selected) {
         .icon-wrapper {
-          i, svg {
+
+          i,
+          svg {
             transform: translateY(-3px);
             color: color.adjust(variable.$primary, $lightness: 10%);
           }
+
           .icon-label {
             color: color.adjust(#0A1C26, $lightness: 10%);
             color: color.adjust(#0A1C26, $lightness: 10%);
@@ -393,10 +466,13 @@
 
       &.selected {
         .icon-wrapper {
-          i, svg {
+
+          i,
+          svg {
             color: variable.$primary; // Vermelho para ícone selecionado
             transform: translateY(-3px);
           }
+
           .icon-label {
             color: variable.$primary; // Vermelho para label selecionado
             font-weight: 600;
