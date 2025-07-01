@@ -1,119 +1,99 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import './GeoLocationAutocomplete.scss';
-
-const CACHE_KEY = 'ibge:brazil:municipios';
-const EXPIRY_KEY = 'ibge:brazil:expiry';
-const TTL = 1000 * 60 * 60 * 24; // 24h
+import { normalize, debounce } from './Utils/utils';
+import { getCachedData, saveToCache } from './Utils/cacheService';
+import * as LocationService from './Services/locationService';
 
 const GeoLocationAutocomplete = ({ onSelect }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const memoryCache = useRef([]);
-  const debounce = useRef(null);
   const [placeholderLocation, setPlaceholderLocation] = useState('Buscando localização...');
   const [selectedValue, setSelectedValue] = useState('');
-
-
+  const memoryCache = useRef([]);
   useEffect(() => {
     init();
+    setupCurrentLocation();
   }, []);
 
   const init = async () => {
-    const now = Date.now();
-    const stored = localStorage.getItem(CACHE_KEY);
-    const expiry = localStorage.getItem(EXPIRY_KEY);
-
-    if (stored && expiry && now < +expiry) {
-      memoryCache.current = JSON.parse(stored);
+    const cachedData = getCachedData();
+    if (cachedData) {
+      memoryCache.current = cachedData;
       return;
     }
 
-    const resEstados = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-    const ufs = await resEstados.json();
-
-    const todos = [];
-    for (const uf of ufs) {
-      const resMun = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf.sigla}/municipios`);
-      const municipios = await resMun.json();
-      municipios.forEach(m => {
-        todos.push({
-          display_name: `${m.nome}, ${uf.sigla}, Brasil`,
-          name: m.nome,
-          state: uf.sigla
-        });
-      });
-    }
-
-    memoryCache.current = todos;
-    localStorage.setItem(CACHE_KEY, JSON.stringify(todos));
-    localStorage.setItem(EXPIRY_KEY, String(now + TTL));
+    const cities = await LocationService.fetchBrazilianCities();
+    memoryCache.current = cities;
+    saveToCache(cities);
   };
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      async ({ coords: { latitude, longitude } }) => {
-        try {
-          const res = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
-          );
-          const data = await res.json();
+  const setupCurrentLocation = async () => {
+    try {
+      const position = await LocationService.getCurrentLocation();
+      const { coords: { latitude, longitude } } = position;
+      const data = await LocationService.reverseGeocode(latitude, longitude);
 
-          const location = [
-            data.address.city || data.address.town || '',
-            data.address.state || '',
-            data.address.country || ''
-          ]
-            .filter(Boolean)
-            .join(', ');
-
-          if (data.address.country === 'Brazil' || data.address.country_code === 'br') {
-            const cidade = data.address.city || data.address.town || '';
-            const estado = data.address.state || '';
-            const pais = data.address.country || '';
-
-            const cidadeUF = memoryCache.current.find(loc =>
-              normalize(loc.name) === normalize(cidade) &&
-              normalize(loc.state) === normalize(estado)
-            );
-
-            const location = cidadeUF?.display_name || [cidade, estado, pais].filter(Boolean).join(', ');
-
-            setSelectedValue(location);
-            setQuery(location);
-            setPlaceholderLocation(location);
-          } else {
-            setPlaceholderLocation('Fora do Brasil');
-          }
-        } catch (err) {
-          console.error('Erro ao buscar localização:', err);
-          setPlaceholderLocation('Erro ao obter localização');
-        }
-      },
-      () => {
-        setPlaceholderLocation('Permissão negada');
+      if (data.address.country === 'Brazil' || data.address.country_code === 'br') {
+        handleBrazilianLocation(data);
+      } else {
+        setPlaceholderLocation('Fora do Brasil');
       }
+    } catch (err) {
+      console.error('Erro ao buscar localização:', err);
+      setPlaceholderLocation(err.message === 'User denied Geolocation'
+        ? 'Permissão negada'
+        : 'Erro ao obter localização');
+    }
+  };
+
+  const handleBrazilianLocation = (data) => {
+    const cidade = data.address.city || data.address.town || '';
+    const estado = data.address.state || '';
+    const country = data.address.country || '';
+
+    const cidadeUF = LocationService.findLocationInCache(memoryCache.current, cidade, estado);
+    const location = cidadeUF?.display_name || [cidade, estado, country].filter(Boolean).join(', ');
+
+    setSelectedValue(location);
+    setQuery(location);
+    setPlaceholderLocation(location);
+  };
+
+  const handleSearch = (query) => {
+    if (query === '') { return setPlaceholderLocation('Localização'); }
+
+    const q = normalize(query);
+    if (q.length < 1) return setSuggestions([]);
+
+    // 🔍 Buscar nas cidades
+    const cityResults = memoryCache.current.filter(item =>
+      normalize(item.name).includes(q)
     );
-  }, []);
+
+    // 🔍 Buscar nos estados (code ou name)
+    const stateResults = LocationService.States.filter(state =>
+      normalize(state.name).includes(q) || normalize(state.code).startsWith(q)
+    ).map(state => ({
+      display_name: `${state.name} - UF`,
+      name: state.name,
+      state: state.code
+    }));
+
+    // Combinar tudo (evita duplicados)
+    const combinedResults = [...stateResults, ...cityResults];
+
+    setSuggestions(combinedResults.slice(0, 10));
+  };
+
+  const debouncedSearch = debounce(handleSearch, 300);
 
   useEffect(() => {
-    clearTimeout(debounce.current);
-    debounce.current = setTimeout(() => {
-      const q = normalize(query);
-      if (q.length < 3) return setSuggestions([]);
-      const results = memoryCache.current.filter(item => normalize(item.name).includes(q));
-      setSuggestions(results.slice(0, 10));
-    }, 300);
+    debouncedSearch(query);
   }, [query]);
-
-  const normalize = (str) => str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
 
   const handleSelect = (item) => {
     setQuery(item.display_name);
     setSuggestions([]);
-    if (onSelect) onSelect(item);
+    onSelect?.(item);
   };
 
 

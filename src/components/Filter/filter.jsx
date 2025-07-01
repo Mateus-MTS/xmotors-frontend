@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RangeSlider from './RangeSlider';
 import GeoLocation from './GeoLocationFilterAutocomplete';
+import YearRangeSlider from './YearRangeSlider';
 
 function Filter() {
     const [selectedVehicle, setSelectedVehicle] = useState('3'); // Estado para o veículo selecionado
@@ -129,7 +130,7 @@ function RenderTabHome() {
         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <form method="post" id="search-forms">
                 <div className="inner-group grid">
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <div className="group-select">
                             <div className="nice-select" tabIndex="0">
                                 <span className="current">UF</span>
@@ -155,7 +156,7 @@ function RenderTabHome() {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <div>
                             {/* Outros elementos */}
@@ -169,8 +170,15 @@ function RenderTabHome() {
                             <RangeSlider />
                         </div>
                     </div>
+                    <div className="form-group">
+                        <div>
+                            {/* <RangeSlider /> */}
+                            <YearRangeSlider />
+                        </div>
+                    </div>
 
-                    <GeoLocation/>
+                    <GeoLocation />
+                    <GeoLocation />
 
                     <div className="form-group">
                         <button type="submit" className="button-search-listing">
