@@ -723,7 +723,8 @@
         -ms-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
-        &:hover{
+
+        &:hover {
             background-color: variable.$black;
             transition: all 0.3s ease;
         }
@@ -1397,10 +1398,11 @@
             line-height: 20.16px;
             letter-spacing: 0.03em;
             box-shadow: 0px 0px 10px 0px variable.$shadow;
-            &:hover{
+
+            &:hover {
                 background-color: variable.$primary;
                 color: variable.$white;
-                transition: all 0.3s ;
+                transition: all 0.3s;
                 border-radius: 5px;
             }
 
@@ -1492,7 +1494,7 @@
             &.active .images {
                 opacity: 1;
                 z-index: -2;
-                transition: all 0,3s;
+                transition: all 0, 3s;
 
                 & img {
                     height: 100%;
@@ -1631,13 +1633,45 @@
             color: variable.$primary;
         }
 
+        .exchange-info {
+            // 📐 Tipografia
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: variable.$black-primary;
+
+            // 🧱 Layout e borda
+            border: 1px solid variable.$primary;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            // 📏 Espaçamento interno e externo
+            padding: 5px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            margin-left: auto; // 👉 Alinha à direita
+
+            // 🔲 Largura responsiva
+            // ✅ Garante que ele não estoure layout
+            width: fit-content;
+            max-width: 100%;
+
+            // 🚫 Quando não há conteúdo, mantém altura e remove a borda
+            &:empty {
+                border: none;
+                height: 32px; // 📏 Altura fixa para manter alinhamento visual
+                padding: 5px; // 🧩 Mantém espaçamento interno mesmo vazio
+            }
+        }
+
         & .description {
             & ul {
                 display: flex;
                 align-items: flex-start;
                 justify-content: space-between;
+                border-top: 1px solid #EFEFEF;
                 border-bottom: 1px solid #EFEFEF;
-                padding: 20px 0px 30px 0px;
+                padding: 20px 0px 20px 0px;
 
                 & li.listing-information {
                     position: relative;
@@ -1649,7 +1683,7 @@
                             width: 1px;
                             height: 26px;
                             background-color: #D9D9D9;
-                            content: "";
+                            // content: "";
                             position: absolute;
                             right: -15%;
                             top: 50%;
@@ -1752,6 +1786,7 @@
         }
     }
 }
+
 .hoverable-indicators {
     position: absolute;
     bottom: 0;
@@ -1760,6 +1795,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .hoverable-indicators {
     position: absolute;
     bottom: 0;
@@ -1768,6 +1804,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .hoverable-indicators .indicator {
     width: 100%;
     height: 3px;
@@ -1775,6 +1812,7 @@
     z-index: 25;
     margin-right: 2px;
 }
+
 .hoverable-indicators .indicator.active {
     background-color: variable.$primary;
 }
@@ -1853,7 +1891,7 @@
         }
 
         & .title {
-            & a{
+            & a {
                 color: variable.$white;
             }
         }
@@ -1947,6 +1985,7 @@
         }
     }
 }
+
 /*------------ Widget Car Service V2---------------- */
 
 /*------------ Widget logo partner ---------------- */
@@ -1961,6 +2000,7 @@
         }
     }
 }
+
 .title-section {
     position: relative;
     margin-bottom: 57px;
@@ -1995,8 +2035,9 @@
 
 /*------------ Widget server v2 ---------------- */
 .tab-car-service-v2 {
-        gap: 14px;
-        justify-content: center !important;
+    gap: 14px;
+    justify-content: center !important;
+
     & .nav-item {
         & .nav-link {
             font-size: 16px;
@@ -2024,6 +2065,7 @@
         }
     }
 }
+
 .header-tab {
     display: flex;
     align-items: center;
@@ -2103,6 +2145,7 @@
         }
     }
 }
+
 /*------------ Widget Quote ---------------- */
 
 /*------------ Widget car banner ---------------- */
@@ -2170,6 +2213,7 @@
         transform: scale3d(1.1, 1.1, 1.1);
     }
 }
+
 .car-bg-red {
     background-image: url(../images/banner/bg2.png);
     background-repeat: no-repeat;
@@ -2185,6 +2229,7 @@
     padding: 60px 44px;
     position: relative;
 }
+
 //style 02
 .car-banner-style2 {
     background-image: url(../images/banner/bg4.png);
@@ -2265,6 +2310,7 @@
         transform: scale3d(1.05, 1.05, 1.05);
     }
 }
+
 /*------------ Widget car banner ---------------- */
 
 /*------------ Widget Selling car ---------------- */
@@ -2641,11 +2687,13 @@
     padding-bottom: 132px;
 
 }
+
 .testimonial-swiper {
     overflow: hidden;
     position: relative;
     width: 100%;
 }
+
 .testimonial-car-v1 {
     padding: 0px 67px 0px 78px;
     padding-top: 100px;
@@ -2796,6 +2844,7 @@
         }
     }
 }
+
 .list-icon-check {
     margin-top: 47px;
     margin-bottom: 52px;
@@ -2910,12 +2959,14 @@
     padding-top: 98px;
     padding-bottom: 118px;
 }
+
 /*------------ Widget logo ---------------- */
 
 /*------------ Widget car list v2 ---------------- */
 .widget-car-list-v2 {
     padding-bottom: 130px;
 }
+
 /*------------ Widget car list v2 ---------------- */
 
 /*------------ Widget Bookingcar ---------------- */
@@ -2975,6 +3026,7 @@
         }
     }
 }
+
 .header-section {
     display: flex;
     flex-wrap: wrap;
@@ -3007,6 +3059,7 @@
         }
     }
 }
+
 /*------------ Widget Bookingcar ---------------- */
 
 /*------------ Widget Category ---------------- */
@@ -3069,6 +3122,7 @@
         }
     }
 }
+
 /*------------ Widget Category ---------------- */
 
 /*------------ Widget feature v2 ---------------- */
@@ -3201,6 +3255,40 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    list-style: none;
+    gap: 8px;
+}
+
+.pagination li button {
+    padding: 6px 12px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s;
+    background: variable.$white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.07);
+    line-height: 20.16px;
+    color: variable.$black2;
+    min-width: 40px;
+    cursor: pointer;
+
+    // 🖱️ Hover effect
+    &:hover {
+        background: variable.$primary;
+        color: variable.$white;
+    }
+}
+
+.pagination li.active button {
+    background: variable.$primary;
+    color: variable.$white;
+}
+
+
 /*------------ Widget best-deals ---------------- */
 
 /*------------ Widget banner-v2 ---------------- */
@@ -3342,7 +3430,8 @@
     background-size: cover;
 }
 
-.mybest-selling,.mybest-selling2 {
+.mybest-selling,
+.mybest-selling2 {
     overflow: hidden;
 }
 
@@ -3576,6 +3665,7 @@
     & .new-cars-wrap {
         & .new-cars {
             overflow: hidden;
+
             & .swiper-wrapper {
                 margin-bottom: 20px;
             }
@@ -4622,7 +4712,7 @@ a.mapboxgl-ctrl-logo {
             gap: 16px;
             display: none;
 
-            &>li > a {
+            &>li>a {
                 padding: 6px 15px;
                 border-radius: 100px;
                 background-color: #F4F4F4;
@@ -6128,6 +6218,7 @@ a.mapboxgl-ctrl-logo {
 
         & .main-menu .navigation>li>a {
             color: variable.$white;
+
             &::after {
                 color: variable.$white;
             }
@@ -6183,7 +6274,8 @@ a.mapboxgl-ctrl-logo {
                     font-weight: 500;
                     line-height: 22px;
                     color: #0D0E0F;
-                    & .list{
+
+                    & .list {
                         min-width: 220px;
                         width: 100%;
                         right: 0;

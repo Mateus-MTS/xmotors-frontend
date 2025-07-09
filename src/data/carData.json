@@ -1,0 +1,2403 @@
+[
+  {
+    "id": 1,
+    "title": "Chevrolet Suburban 2021",
+    "subtitle": "Mini Cooper 3 Similar",
+    "price": 27000,
+    "year": 2023,
+    "featured": true,
+    "mileage": 90000,
+    "fuel": "Gasolina",
+    "transmission": "Auto",
+    "acceptsExchange": true,
+    "photosCount": 6,
+    "images": [
+      "/assets/images/car-list/car1.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car12.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Toyota Corolla Altis 2022",
+    "subtitle": "Family Sedan",
+    "price": 23000,
+    "year": 2022,
+    "featured": true,
+    "mileage": 45000,
+    "fuel": "Híbrido",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car2.jpg",
+      "/assets/images/car-list/car21.jpg",
+      "/assets/images/car-list/car21.jpg",
+      "/assets/images/car-list/car22.jpg"
+    ],
+    "photosCount": 4
+  },
+  {
+    "id": 3,
+    "title": "Honda Civic Sport 2021",
+    "subtitle": "Compact Sport",
+    "price": 21000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 60000,
+    "fuel": "Gasolina",
+    "transmission": "Auto",
+    "acceptsExchange": true,
+    "images": [
+      "/assets/images/car-list/car3.jpg",
+      "/assets/images/car-list/car3.jpg",
+      "/assets/images/car-list/car3.jpg",
+      "/assets/images/car-list/car23.jpg",
+      "/assets/images/car-list/car8.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Ford EcoSport Titanium 2020",
+    "subtitle": "Small SUV",
+    "price": 18000,
+    "year": 2020,
+    "featured": true,
+    "mileage": 75000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": true,
+    "images": [
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car10.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "BMW X1 sDrive20i 2023",
+    "subtitle": "Luxury SUV",
+    "price": 42000,
+    "year": 2023,
+    "featured": true,
+    "mileage": 30000,
+    "fuel": "Flex",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car18.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car12.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Audi A4 TFSI 2022",
+    "subtitle": "Luxury Sedan",
+    "price": 38000,
+    "year": 2022,
+    "featured": true,
+    "mileage": 40000,
+    "fuel": "Flex",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car4.jpg",
+      "/assets/images/car-list/car22.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Volkswagen T-Cross 2020",
+    "subtitle": "Urban Crossover",
+    "price": 20000,
+    "year": 2020,
+    "featured": true,
+    "mileage": 55000,
+    "fuel": "Elétrico",
+    "transmission": "Auto",
+    "acceptsExchange": true,
+    "images": [
+      "/assets/images/car-list/car7.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car2.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Renault Kwid Zen 2021",
+    "subtitle": "City Compact",
+    "price": 12000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 25000,
+    "fuel": "Híbrido",
+    "transmission": "Manual",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car19.jpg",
+      "/assets/images/car-list/car19.jpg",
+      "/assets/images/car-list/car19.jpg",
+      "/assets/images/car-list/car17.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Hyundai Creta 2022",
+    "subtitle": "Family SUV",
+    "price": 25000,
+    "year": 2022,
+    "featured": true,
+    "mileage": 35000,
+    "fuel": "Gasolina",
+    "transmission": "Auto",
+    "acceptsExchange": true,
+    "images": [
+      "/assets/images/car-list/car9.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car13.jpg",
+      "/assets/images/car-list/car6.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Fiat Argo Drive 2020",
+    "subtitle": "Popular Hatch",
+    "price": 16000,
+    "year": 2020,
+    "featured": true,
+    "mileage": 70000,
+    "fuel": "Flex",
+    "transmission": "Manual",
+    "acceptsExchange": true,
+    "images": [
+      "/assets/images/car-list/car10.jpg",
+      "/assets/images/car-list/car10.jpg",
+      "/assets/images/car-list/car10.jpg",
+      "/assets/images/car-list/car8.jpg",
+      "/assets/images/car-list/car2.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Mercedes-Benz CLA 200",
+    "subtitle": "Sport Sedan",
+    "price": 46000,
+    "year": 2023,
+    "featured": true,
+    "mileage": 20000,
+    "fuel": "Gasolina",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car9.jpg",
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car6.jpg",
+      "/assets/images/car-list/car22.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 28,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 41,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 42,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 43,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 46,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 47,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 48,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 49,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 50,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 51,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 52,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 53,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 54,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 55,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 56,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 57,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 58,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 59,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 60,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 61,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 62,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 63,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 64,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 65,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 66,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 67,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 68,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 69,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 70,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 71,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 72,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 73,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 74,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 75,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 76,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 77,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 78,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 79,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 80,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 81,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 82,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 83,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 84,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 85,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 90,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 91,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 92,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 93,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 94,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 95,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 96,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 97,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 98,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 99,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 100,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 101,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 102,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 103,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 104,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 105,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 106,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 107,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 108,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 109,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 110,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 111,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 112,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 113,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 114,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 115,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 116,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 117,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 118,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 119,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 120,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 121,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 122,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 123,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 124,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 125,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  },
+  {
+    "id": 126,
+    "title": "Jeep Compass 2021",
+    "subtitle": "Adventure SUV",
+    "price": 30000,
+    "year": 2021,
+    "featured": true,
+    "mileage": 50000,
+    "fuel": "Diesel",
+    "transmission": "Auto",
+    "acceptsExchange": false,
+    "images": [
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car12.jpg",
+      "/assets/images/car-list/car11.jpg",
+      "/assets/images/car-list/car1.jpg"
+    ]
+  }
+]
