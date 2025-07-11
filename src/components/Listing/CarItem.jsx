@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CarItem = ({
     title,
     subtitle,
     price,
     year,
+    condition,
     featured,
     mileage,
     fuel,
@@ -12,6 +13,9 @@ const CarItem = ({
     acceptsExchange,
     images
 }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const formattedCondition = condition.charAt(0).toUpperCase() + condition.slice(1);
+
     return (
         <>
             <div className="tf-car-service">
@@ -19,7 +23,7 @@ const CarItem = ({
                     <div className="stm-badge-top">
                         {featured && (
                             <div className="feature">
-                                <span>Destaque</span>
+                                <span>{formattedCondition}</span>
                                 <div className="cut">
                                     <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -40,24 +44,43 @@ const CarItem = ({
                     <div className="listing-images">
                         <div className="hover-listing-image">
                             <div className="wrap-hover-listing">
-                                {images.map((img, i) => (
-                                    <div key={i} className={`listing-item ${i === 0 ? 'active' : ''}`}>
+                                {images.slice(0, 4).map((img, i) => (
+                                    <div
+                                        key={i}
+                                        className={`listing-item ${i === activeIndex ? 'active' : ''}`}
+                                        onMouseEnter={() => setActiveIndex(i)}
+                                    >
                                         <div className="images">
                                             <img src={img} alt={`car-${i}`} />
                                         </div>
                                     </div>
                                 ))}
-                                {images.length > 2 && (
-                                    <div className="listing-item view-gallery">
+
+                                {images.length > 3 && (
+                                    <div
+                                        className={`listing-item view-gallery ${activeIndex === 3 ? 'active' : ''}`}
+                                        onMouseEnter={() => setActiveIndex(3)}
+                                    >
                                         <div className="images">
-                                            <img src={images[2]} alt="more" />
+                                            <img src={images[3]} alt="more" />
                                             <div className="overlay-limit">
-                                                <img src="/assets/images/car-list/img.png" alt="icon" />
-                                                <p>Mais {images.length - 4} fotos</p>
+                                                <p>Veja mais 👉</p>
                                             </div>
                                         </div>
                                     </div>
                                 )}
+
+                                <div className="bullet-hover-listing">
+                                    {images.slice(0, 4).map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className={`bl-item ${activeIndex === i ? 'active' : ''}`}
+                                            onMouseEnter={() => setActiveIndex(i)}
+                                        />
+                                    ))}
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -120,9 +143,6 @@ const CarItem = ({
                 </div>
             </div>
         </>
-
-
-
     );
 };
 

@@ -2,20 +2,32 @@ import React, { useEffect, useRef, useState } from 'react';
 import CarItem from './CarItem';
 import carData from './../../data/carData.json'; // ou vir de API/filtro
 
-function GetListing() {
-    const [cars, setCars] = useState([]);
+function Listing() {
+    // Estado para filtro
+    const [filterType, setFilterType] = useState('todos');
+
+    // Estado para paginação
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
-
-    // Cálculo de índice
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentCars = carData.slice(indexOfFirstItem, indexOfLastItem);
+    const [pageGroupStart, setPageGroupStart] = useState(1);
 
     useEffect(() => {
-        // Carrega os primeiros 12 carros
-        setCars(carData.slice(0, 12));
-    }, []);
+        setCurrentPage(1);
+        setPageGroupStart(1);
+    }, [filterType]);
+
+
+    // Cálculo de índice
+    const filteredCars = carData.filter(car => {
+        if (filterType === 'novos') return car.condition === 'novo';
+        if (filterType === 'usados') return car.condition === 'usado';
+        return true; // todos
+    });
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentCars = filteredCars.slice(indexOfFirstItem, indexOfLastItem);
+
 
     return (
         <>
@@ -26,21 +38,30 @@ function GetListing() {
                             <span className="sub-title mb-6 wow fadeInUp">Explore todos os veículos</span>
                             <h2 className="title wow fadeInUp">Ver listagem</h2>
                         </div>
-                        <ul className="nav nav-pills justify-content-end" id="pills-tab-service" role="tablist">
+                        <ul className="nav nav-pills justify-content-end" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link active" id="pills-home-tab-service" data-bs-toggle="pill"
-                                    data-bs-target="#pills-home-service" type="button" role="tab"
-                                    aria-selected="true">Todos</button>
+                                <button
+                                    className={`nav-link ${filterType === 'todos' ? 'active' : ''}`}
+                                    onClick={() => setFilterType('todos')}
+                                >
+                                    Todos
+                                </button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="pills-profile-tab-service" data-bs-toggle="pill"
-                                    data-bs-target="#pills-profile-service" type="button" role="tab"
-                                    aria-selected="false">Novos</button>
+                                <button
+                                    className={`nav-link ${filterType === 'novos' ? 'active' : ''}`}
+                                    onClick={() => setFilterType('novos')}
+                                >
+                                    Novos
+                                </button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="pills-contact-tab-service" data-bs-toggle="pill"
-                                    data-bs-target="#pills-contact-service" type="button" role="tab"
-                                    aria-selected="false">Usados</button>
+                                <button
+                                    className={`nav-link ${filterType === 'usados' ? 'active' : ''}`}
+                                    onClick={() => setFilterType('usados')}
+                                >
+                                    Usados
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -50,9 +71,15 @@ function GetListing() {
                                 {currentCars.map(car => (
                                     <CarItem key={car.id} {...car} />
                                 ))}
-
                             </div>
-                            {renderPagination(carData.length, itemsPerPage, currentPage, setCurrentPage)}
+                            {renderPagination({
+                                totalItems: filteredCars.length,
+                                itemsPerPage,
+                                currentPage,
+                                onPageChange: setCurrentPage,
+                                pageGroupStart,
+                                onPageGroupChange: setPageGroupStart,
+                            })}
                         </div>
                     </div>
                 </div>
@@ -61,20 +88,69 @@ function GetListing() {
     )
 }
 
-const renderPagination = (totalItems, itemsPerPage, currentPage, onPageChange) => {
+const renderPagination = ({
+    totalItems,
+    itemsPerPage,
+    currentPage,
+    onPageChange,
+    pageGroupStart,
+    onPageGroupChange,
+}) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const pageGroupSize = 5;
+    const pageGroupEnd = Math.min(pageGroupStart + pageGroupSize - 1, totalPages);
+
+    const currentPageGroup = Array.from(
+        { length: pageGroupEnd - pageGroupStart + 1 },
+        (_, i) => pageGroupStart + i
+    );
+
+    const canGoBack = pageGroupStart > 1;
+    const canGoForward = pageGroupEnd < totalPages;
 
     return (
         <ul className="pagination">
-            {[...Array(totalPages)].map((_, i) => (
-                <li key={i} className={currentPage === i + 1 ? 'active' : ''}>
-                    <button onClick={() => onPageChange(i + 1)}>
-                        {i + 1}
-                    </button>
+            <li>
+                <button
+                    onClick={() => {
+                        if (canGoBack) {
+                            const newStart = pageGroupStart - pageGroupSize;
+                            onPageGroupChange(newStart);
+                            onPageChange(newStart);
+                        }
+                    }}
+                    disabled={!canGoBack}
+                    title="Anterior"
+                >
+                    ◀
+                </button>
+            </li>
+
+            {currentPageGroup.map((page) => (
+                <li key={page} className={currentPage === page ? 'active' : ''}>
+                    <button onClick={() => onPageChange(page)}>{page} </button>
                 </li>
             ))}
+
+            <li>
+                <button
+                    onClick={() => {
+                        if (canGoForward) {
+                            const newStart = pageGroupStart + pageGroupSize;
+                            const nextPage = newStart <= totalPages ? newStart : totalPages;
+                            onPageGroupChange(newStart);
+                            onPageChange(nextPage);
+                        }
+                    }}
+                    disabled={!canGoForward}
+                    title="Próximo"
+                >
+                    ▶
+                </button>
+
+            </li>
         </ul>
     );
 };
 
-export default GetListing;
+export default Listing;
