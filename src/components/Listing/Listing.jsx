@@ -1,104 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CarItem from './CarItem';
-import carData from './../../data/carData.json'; // ou vir de API/filtro
+import carData from './../../data/carData.json';
 
-function Listing() {
-    // Estado para filtro
-    const [filterType, setFilterType] = useState('todos');
+// Constantes para configuração
+const ITEMS_PER_PAGE = 12;
+const PAGINATION_GROUP_SIZE = 5;
 
-    // Estado para paginação
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 12;
-    const [pageGroupStart, setPageGroupStart] = useState(1);
+// Objeto para tipos de filtro
+const FILTER_TYPES = {
+    ALL: 'todos',
+    NEW: 'novos',
+    USED: 'usados'
+};
 
-    useEffect(() => {
-        setCurrentPage(1);
-        setPageGroupStart(1);
-    }, [filterType]);
+/**
+ * Componente para botão de filtro
+ */
+const FilterButton = ({ active, label, onClick }) => (
+    <li className="nav-item" role="presentation">
+        <button className={`nav-link ${active ? 'active' : ''}`} onClick={onClick}>
+            {label}
+        </button>
+    </li>
+);
 
-
-    // Cálculo de índice
-    const filteredCars = carData.filter(car => {
-        if (filterType === 'novos') return car.condition === 'novo';
-        if (filterType === 'usados') return car.condition === 'usado';
-        return true; // todos
-    });
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentCars = filteredCars.slice(indexOfFirstItem, indexOfLastItem);
-
-
-    return (
-        <>
-            <div className="widget-car-service">
-                <div className="themesflat-container">
-                    <div className="header-section tab-car-service">
-                        <div className="heading-section">
-                            <span className="sub-title mb-6 wow fadeInUp">Explore todos os veículos</span>
-                            <h2 className="title wow fadeInUp">Ver listagem</h2>
-                        </div>
-                        <ul className="nav nav-pills justify-content-end" role="tablist">
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link ${filterType === 'todos' ? 'active' : ''}`}
-                                    onClick={() => setFilterType('todos')}
-                                >
-                                    Todos
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link ${filterType === 'novos' ? 'active' : ''}`}
-                                    onClick={() => setFilterType('novos')}
-                                >
-                                    Novos
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link ${filterType === 'usados' ? 'active' : ''}`}
-                                    onClick={() => setFilterType('usados')}
-                                >
-                                    Usados
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="tab-content" id="pills-tabContent">
-                        <div className="tab-pane fade show active" id="pills-home-service" role="tabpanel">
-                            <div className="car-list-item">
-                                {currentCars.map(car => (
-                                    <CarItem key={car.id} {...car} />
-                                ))}
-                            </div>
-                            {renderPagination({
-                                totalItems: filteredCars.length,
-                                itemsPerPage,
-                                currentPage,
-                                onPageChange: setCurrentPage,
-                                pageGroupStart,
-                                onPageGroupChange: setPageGroupStart,
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
-
-const renderPagination = ({
+/**
+ * Componente de Paginação
+ */
+const Pagination = ({
     totalItems,
     itemsPerPage,
     currentPage,
     onPageChange,
     pageGroupStart,
-    onPageGroupChange,
+    onPageGroupChange
 }) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const pageGroupSize = 5;
-    const pageGroupEnd = Math.min(pageGroupStart + pageGroupSize - 1, totalPages);
+    const pageGroupEnd = Math.min(pageGroupStart + PAGINATION_GROUP_SIZE - 1, totalPages);
 
     const currentPageGroup = Array.from(
         { length: pageGroupEnd - pageGroupStart + 1 },
@@ -114,7 +52,7 @@ const renderPagination = ({
                 <button
                     onClick={() => {
                         if (canGoBack) {
-                            const newStart = pageGroupStart - pageGroupSize;
+                            const newStart = pageGroupStart - PAGINATION_GROUP_SIZE;
                             onPageGroupChange(newStart);
                             onPageChange(newStart);
                         }
@@ -128,7 +66,7 @@ const renderPagination = ({
 
             {currentPageGroup.map((page) => (
                 <li key={page} className={currentPage === page ? 'active' : ''}>
-                    <button onClick={() => onPageChange(page)}>{page} </button>
+                    <button onClick={() => onPageChange(page)}>{page}</button>
                 </li>
             ))}
 
@@ -136,7 +74,7 @@ const renderPagination = ({
                 <button
                     onClick={() => {
                         if (canGoForward) {
-                            const newStart = pageGroupStart + pageGroupSize;
+                            const newStart = pageGroupStart + PAGINATION_GROUP_SIZE;
                             const nextPage = newStart <= totalPages ? newStart : totalPages;
                             onPageGroupChange(newStart);
                             onPageChange(nextPage);
@@ -147,9 +85,92 @@ const renderPagination = ({
                 >
                     ▶
                 </button>
-
             </li>
         </ul>
+    );
+};
+
+/**
+ * Função para filtrar carros
+ */
+const filterCars = (cars, filterType) => {
+    switch (filterType) {
+        case FILTER_TYPES.NEW:
+            return cars.filter(car => car.condition === 'novo');
+        case FILTER_TYPES.USED:
+            return cars.filter(car => car.condition === 'usado');
+        default:
+            return cars;
+    }
+};
+
+/**
+ * Componente principal Listing
+ */
+const Listing = () => {
+    const [filterType, setFilterType] = useState(FILTER_TYPES.ALL);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageGroupStart, setPageGroupStart] = useState(1);
+
+    // Resetar paginação quando o filtro mudar
+    useEffect(() => {
+        setCurrentPage(1);
+        setPageGroupStart(1);
+    }, [filterType]);
+
+    // Aplicar filtros
+    const filteredCars = filterCars(carData, filterType);
+
+    // Calcular itens da página atual
+    const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    const currentCars = filteredCars.slice(indexOfFirstItem, indexOfLastItem);
+
+    return (
+        <div className="widget-car-service">
+            <div className="themesflat-container">
+                <div className="header-section tab-car-service">
+                    <div className="heading-section">
+                        <span className="sub-title mb-6 wow fadeInUp">Explore todos os veículos</span>
+                        <h2 className="title wow fadeInUp">Ver listagem</h2>
+                    </div>
+                    <ul className="nav nav-pills justify-content-end" role="tablist">
+                        <FilterButton
+                            active={filterType === FILTER_TYPES.ALL}
+                            label="Todos"
+                            onClick={() => setFilterType(FILTER_TYPES.ALL)}
+                        />
+                        <FilterButton
+                            active={filterType === FILTER_TYPES.NEW}
+                            label="Novos"
+                            onClick={() => setFilterType(FILTER_TYPES.NEW)}
+                        />
+                        <FilterButton
+                            active={filterType === FILTER_TYPES.USED}
+                            label="Usados"
+                            onClick={() => setFilterType(FILTER_TYPES.USED)}
+                        />
+                    </ul>
+                </div>
+                <div className="tab-content" id="pills-tabContent">
+                    <div className="tab-pane fade show active" id="pills-home-service" role="tabpanel">
+                        <div className="car-list-item">
+                            {currentCars.map(car => (
+                                <CarItem key={car.id} {...car} />
+                            ))}
+                        </div>
+                        <Pagination
+                            totalItems={filteredCars.length}
+                            itemsPerPage={ITEMS_PER_PAGE}
+                            currentPage={currentPage}
+                            onPageChange={setCurrentPage}
+                            pageGroupStart={pageGroupStart}
+                            onPageGroupChange={setPageGroupStart}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 
