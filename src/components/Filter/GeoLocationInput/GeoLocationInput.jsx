@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { normalize, debounce } from './Utils/utils';
-import { getCachedData, saveToCache } from './Utils/cacheService';
-import * as LocationService from './Services/locationService';
+import { normalize, debounce } from '../Utils/utils';
+import { getCachedData, saveToCache } from '../Utils/cacheService';
+import * as LocationService from '../Services/locationService';
 
-const GeoLocationAutocomplete = ({ onSelect }) => {
+const GeoLocationInput = ({ onSelect }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [placeholderLocation, setPlaceholderLocation] = useState('Buscando localização...');
@@ -127,4 +127,4 @@ const GeoLocationAutocomplete = ({ onSelect }) => {
   );
 };
 
-export default GeoLocationAutocomplete;
+export default GeoLocationInput;

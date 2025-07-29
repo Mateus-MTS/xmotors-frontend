@@ -1,46 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './_index.scss';
-import Slide from './Slide/slide.jsx';
-import Filter from './Filter/filter.jsx';
-import Listing from './Listing/Listing.jsx';
+import Header from './common/Header/Header';
+import Slide from './Slide/Carousel/Carousel.jsx';
+import Filter from './Filter/FilterPanel/FilterPanel.jsx';
+import ListingView from './Listing/Listing.jsx';
+import Footer from './Footer/Footer.jsx';
+import Preloader from './common/PreLoader/PreLoader.jsx';
 
 function App() {
-  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
-  const [openSubmenus, setOpenSubmenus] = useState({});
+  const [showPreloader, setShowPreloader] = useState(true);
 
-  // Toggle menu mobile
-  const toggleMobileMenu = () => {
-    setMobileMenuVisible(!mobileMenuVisible);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1000);
 
-  // Fechar menu mobile
-  const closeMobileMenu = () => {
-    setMobileMenuVisible(false);
-    setOpenSubmenus({});
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
-  // Toggle submenus
-  const toggleSubmenu = (index) => (e) => {
-    e.preventDefault();
-    setOpenSubmenus(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
-
-  // Dados do menu
+  // Dados do menu (pode ser movido para um arquivo separado)
   const menuItems = [
-    {
-      title: "Home",
-      submenu: [
-        { text: "Home Page 01", href: "index.html" },
-        { text: "Home Page 02", href: "home02.html" },
-        { text: "Home Page 03", href: "home03.html" },
-        { text: "Home Page 04", href: "home04.html" },
-        { text: "Home Page 05", href: "home05.html" },
-        { text: "Home Page 06", href: "home06.html" }
-      ]
-    },
     {
       title: "Veículos",
       submenu: [
@@ -74,157 +53,17 @@ function App() {
 
   return (
     <>
-      <header id="header3" className={`main-header header header-fixed ${mobileMenuVisible ? 'mobile-menu-visible' : ''}`}>
-        <div className="header-lower">
-          <div className="themesflat-container">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="header-style2 flex justify-space align-center">
-                  {/* Logo Start */}
-                  <div className="logo-box flex">
-                    <div className="logo">
-                      <a href="index.html">
-                        <img src="assets/images/logo/logo2@.png" alt="Logo" />
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="nav-outer flex align-center">
-                    {/* Main Menu Start */}
-                    <nav className="main-menu show navbar-expand-md">
-                      <div className="navbar-collapse collapse clearfix">
-                        <ul className="navigation clearfix">
-                          {menuItems.map((item, index) => (
-                            <li
-                              key={index}
-                              className={`${item.submenu ? 'dropdown2' : ''} ${index === 0 ? 'current' : ''}`}
-                            >
-                              <a href={item.href || '#'}>{item.title}</a>
-                              {item.submenu && (
-                                <ul>
-                                  {item.submenu.map((subItem, subIndex) => (
-                                    <li key={subIndex} className={subIndex === 0 ? 'current' : ''}>
-                                      <a href={subItem.href}>{subItem.text}</a>
-                                    </li>
-                                  ))}
-                                </ul>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </nav>
-                    {/* Main Menu End */}
-                  </div>
-
-                  <div className="header-account flex align-center">
-                    <div className="register ml--18">
-                      <div className="flex align-center">
-                        <a data-bs-toggle="modal" href="#exampleModalToggle" role="button">Registre-se</a>
-                        <a data-bs-toggle="modal" href="#exampleModalToggle2" role="button">Login</a>
-                      </div>
-                    </div>
-                    <div className="flat-bt-top sc-btn-top ml--20">
-                      <a className="btn-icon-list" href="car-list.html">
-                        <span>Adicionar</span>
-                        <i className="icon-add-button-1"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Mobile Menu Toggler */}
-                  <div
-                    className={`mobile-nav-toggler mobile-button ${mobileMenuVisible ? 'active' : ''}`}
-                    onClick={toggleMobileMenu}
-                  >
-                    <span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End Header Lower */}
-
-        {/* Mobile Menu */}
-        <div className={`mobile-menu ${mobileMenuVisible ? 'visible' : ''}`}>
-          <div className="menu-backdrop" onClick={closeMobileMenu}></div>
-
-          <div className="menu-box">
-            <div className="close-btn" onClick={closeMobileMenu}>
-              <span className="icon flaticon-cancel-1"></span>
-            </div>
-
-            <div className="nav-logo">
-              <a href="index.html">
-                <img src="assets/images/logo/logo2@.png" alt="Logo Motorx" />
-              </a>
-            </div>
-
-            <div className="menu-outer">
-              <ul className="navigation clearfix">
-                {menuItems.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`${item.submenu ? 'dropdown2' : ''} ${openSubmenus[index] ? 'open' : ''}`}
-                  >
-                    <a href={item.href || '#'}>{item.title}</a>
-
-                    {item.submenu && (
-                      <>
-                        <div
-                          className="dropdown2-btn"
-                          onClick={toggleSubmenu(index)}
-                        ></div>
-
-                        <ul style={{
-                          display: openSubmenus[index] ? 'block' : 'none'
-                        }}>
-                          {item.submenu.map((subItem, subIndex) => (
-                            <li key={subIndex}>
-                              <a href={subItem.href}>{subItem.text}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bottom-canvas">
-              <div className="help-bar-mobie login-box">
-                <a data-bs-toggle="modal" href="#exampleModalToggle" role="button" className="fw-7 category">
-                  <i className="icon-user"></i>Login
-                </a>
-              </div>
-              <div className="help-bar-mobie search">
-                <a href="#" className="fw-7 font-2">
-                  <i className="icon-loupe-1"></i>Search
-                </a>
-              </div>
-              <div className="help-bar-mobie compare">
-                <a href="#" className="fw-7 font-2">
-                  <i className="icon-shuffle-2-1"></i>Compare
-                </a>
-              </div>
-              <div className="help-bar-mobie cart">
-                <a href="#" className="fw-7 font-2">
-                  <i className="icon-Vector"></i>Cart
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End Mobile Menu */}
-      </header>
-
+      {showPreloader && <Preloader />}
+      
+      <Header menuItems={menuItems} />
+      
       <main>
         <Slide />
         <Filter />
-        <Listing />
+        <ListingView />
       </main>
+
+      <Footer />
     </>
   );
 }

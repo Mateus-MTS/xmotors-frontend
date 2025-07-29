@@ -2,7 +2,7 @@
 @use "../assets/scss/component/header";
 
 /*------------ Footer Style 01 ---------------- */
-@use ".././assets/scss/component/footer";
+@use "./Footer/footer";
 
 /*------------ Button ---------------- */
 @use ".././assets/scss/component/button";
@@ -20,4 +20,4 @@
 @use "./Filter/search-form";
 
 /*------------ Slider ---------------- */
-@use "./Slide/slider";
+@use "./Slide/Carousel/Carousel.scss";

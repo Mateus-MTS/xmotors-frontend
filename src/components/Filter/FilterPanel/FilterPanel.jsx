@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import RangeSlider from './RangeSlider';
-import GeoLocation from './GeoLocationFilterAutocomplete';
-import YearRangeSlider from './YearRangeSlider';
+import RangeSlider from '../RangeSlider/RangeSlider';
+import GeoLocation from '../GeoLocationInput/GeoLocationInput';
+import YearRangeSlider from '../YearRangeSlider/YearRangeSlider';
 
 function Filter() {
     const [selectedVehicle, setSelectedVehicle] = useState('3'); // Estado para o veículo selecionado

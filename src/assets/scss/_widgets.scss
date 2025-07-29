@@ -13,31 +13,6 @@
 /*------------- pagination ------------- */
 /*------------- breakcrumb ------------- *
 
-/* -------------------------------- */
-.preload-container {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 999999999999999;
-    height: 100%;
-    width: 100%;
-    background-color: variable.$white;
-}
-
-.preload-container .middle {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    z-index: 100;
-    margin: 0px 0px 0px -50px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    content: url(./../images/logo/logo.png);
-    animation: preload 1.2s linear infinite alternate;
-}
-
 
 /* Scroll Top
 -------------------------------------------------------------- */

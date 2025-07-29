@@ -1,7 +1,14 @@
 import { useState } from 'react'
+import useStickySidebar from '../../../hooks/useStickySidebar';
 
 function Slide() {
     const [showContentPrice, setShowContentPrice] = useState(false);
+    const { sidebarRef, isSticky } = useStickySidebar({
+        topSpacing: 20, // Ajuste conforme necessário
+        bottomSpacing: 20,
+        containerSelector: '.widget-tf-slider',
+        innerWrapperSelector: '.slide-item-content'
+    });
 
     const handleIconClick = (event) => {
         setShowContentPrice(!showContentPrice);
@@ -9,14 +16,14 @@ function Slide() {
     return (
         <>
             {/* Slide */}
-            <div className="widget-tf-slider ">
+            <div className="widget-tf-slider" ref={sidebarRef}>
                 <div className="slider-wrap swiper-wrapper">
                     <div className="tf-slide-item swiper-slide">
                         <div className="slide-item-image">
                             <img src="/assets/images/slide/bg.jpg" alt="" />
                             <div className="overlay"></div>
                         </div>
-                        <div className="slide-item-content">
+                        <div className={`slide-item-content ${isSticky ? 'is-sticky' : ''}`}>
                             <div className="slide-content">
                                 <span className="wow fadeInUp sub-title" data-wow-delay="100ms"
                                     data-wow-duration="2000ms">Venda e anúncie aqui</span>

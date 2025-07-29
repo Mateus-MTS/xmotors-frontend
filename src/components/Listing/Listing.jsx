@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CarItem from './CarItem';
-import carData from './../../data/carData.json';
+import CarItem from './CarItem/CarItem.jsx';
+import carData from '../../data/carData.json';
+import ListingView from './ListingView/ListingView.jsx';
 
 // Constantes para configuração
 const ITEMS_PER_PAGE = 12;
@@ -111,6 +112,7 @@ const Listing = () => {
     const [filterType, setFilterType] = useState(FILTER_TYPES.ALL);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageGroupStart, setPageGroupStart] = useState(1);
+    const [viewType, setViewType] = useState('grid');
 
     // Resetar paginação quando o filtro mudar
     useEffect(() => {
@@ -128,6 +130,8 @@ const Listing = () => {
 
     return (
         <div className="widget-car-service">
+            {/* <ListingView viewType={viewType} onViewTypeChange={setViewType} /> */}
+
             <div className="themesflat-container">
                 <div className="header-section tab-car-service">
                     <div className="heading-section">
@@ -154,6 +158,7 @@ const Listing = () => {
                 </div>
                 <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="pills-home-service" role="tabpanel">
+                        {/* <div className={`car-list-item ${viewType === 'list' ? 'list-view' : ''}`}> */}
                         <div className="car-list-item">
                             {currentCars.map(car => (
                                 <CarItem key={car.id} {...car} />

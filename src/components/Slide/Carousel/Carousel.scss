@@ -1,5 +1,5 @@
-@use '../../assets/scss/abstracts/mixin';
-@use '../../assets/scss/abstracts/variable';
+@use '../../../assets/scss/abstracts/mixin';
+@use '../../../assets/scss/abstracts/variable';
 
 /*------------ Slider ---------------- */
 .widget-tf-slider {
@@ -650,3 +650,26 @@
 }
 
 /*------------ Slider V4---------------- */
+
+/* Sticky Sidebar Styles */
+.slide-item-content {
+    transition: all 0.3s ease;
+    
+    &.is-sticky {
+        position: fixed;
+        top: 20px; // Deve corresponder ao topSpacing do hook
+        width: calc(100% - 40px); // Ajuste conforme o layout
+        max-width: 550px; // Mantém a largura original do conteúdo
+        z-index: 100;
+        background: rgba(3, 14, 111, 0.8); // Fundo semi-transparente quando sticky
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideDown 0.3s ease-out;
+    }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
