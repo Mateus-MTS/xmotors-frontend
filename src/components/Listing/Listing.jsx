@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CarItem from './CarItem/CarItem.jsx';
+import CarItem from './Components/CarItem.jsx';
 import carData from '../../data/carData.json';
-import ListingView from './ListingView/ListingView.jsx';
+import ListingView from './ViewType/ViewType.jsx';
 
 // Constantes para configuração
 const ITEMS_PER_PAGE = 12;

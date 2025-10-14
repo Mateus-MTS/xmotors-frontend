@@ -86,13 +86,13 @@ export default function Header({ menuItems }) {
       </div>
 
       {/* Espaçador para quando o header ficar fixo */}
-      <div
+      {/* <div
         ref={spacerRef}
         style={{
           display: 'none',
           height: headerRef.current?.offsetHeight
         }}
-      />
+      /> */}
 
       {/* Menu Mobile */}
       <MobileMenu

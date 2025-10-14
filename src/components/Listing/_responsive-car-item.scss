@@ -1,0 +1,255 @@
+// Responsive styles for CarItem component
+
+@media only screen and (max-width: 1280px) {
+  .tf-car-service {
+    // Estilos para tablets grandes e pequenos desktops
+    .content {
+      padding: 20px;
+    }
+    
+    // .bottom-btn-wrap {
+    //   flex-direction: column;
+    //   gap: 15px;
+    // }
+    
+    .btn-read-more .more-link {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .tf-car-service {
+    .content {
+      padding: 16px 25px 37px 25px;
+
+      .description {
+        ul {
+          li.listing-information {
+            .inner span {
+              display: none;
+            }
+            i {
+              margin-right: 6px;
+              margin-top: 0px;
+            }
+            &:not(:last-child)::after {
+              display: none;
+            }
+            &:not(:last-child) {
+              margin-right: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// @media only screen and (max-width: 1024px) {
+//   .tf-car-service {
+//     // Estilos para tablets
+//     .listing-images {
+//       .hover-listing-image {
+//         .main-image {
+//           height: 180px;
+//         }
+        
+//         .thumbnails {
+//           .listing-item {
+//             width: 60px;
+//             height: 60px;
+            
+//             &.view-gallery .overlay-limit p {
+//               font-size: 11px;
+//             }
+//           }
+//         }
+//       }
+//     }
+    
+//     .description {
+//       ul {
+//         flex-wrap: wrap;
+//         gap: 15px;
+//       }
+      
+//       .listing-information {
+//         flex: 1 0 45%;
+        
+//         .inner span {
+//           display: none;
+//         }
+        
+//         i {
+//           margin-top: 2px;
+//           font-size: 18px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 767px) {
+//   .tf-car-service {
+//     // Estilos para mobile
+//     flex-direction: column;
+    
+//     > .image {
+//       width: 100%;
+      
+//       .listing-images {
+//         .hover-listing-image {
+//           min-height: 250px;
+          
+//           .main-image {
+//             height: 200px;
+//           }
+          
+//           .thumbnails {
+//             justify-content: center;
+//             margin-top: 10px;
+            
+//             .listing-item {
+//               width: 50px;
+//               height: 50px;
+//               margin: 0 5px;
+//             }
+//           }
+          
+//           .bullet-hover-listing {
+//             bottom: 0px;
+            
+//             // .bl-item {
+//             //   width: 8px;
+//             //   height: 10px;
+//             //   margin: 0 0px;
+//             // }
+//           }
+//         }
+//       }
+//     }
+    
+//     .content {
+//       padding: 15px;
+      
+//       .title {
+//         font-size: 16px;
+//         margin: 8px 0;
+//       }
+      
+//       .price {
+//         font-size: 18px;
+//       }
+      
+//       .description {
+//         margin: 15px 0;
+        
+//         .listing-information {
+//           flex: 1 0 100%;
+//           justify-content: center;
+          
+//           .inner {
+//             p {
+//               font-size: 12px;
+//             }
+//           }
+//         }
+//       }
+//     }
+    
+//     .bottom-btn-wrap {
+//       flex-direction: column;
+//       gap: 12px;
+      
+//       .btn-read-more {
+//         width: 100%;
+        
+//         .more-link {
+//           width: 100%;
+//           justify-content: center;
+//         }
+//       }
+      
+//       .btn-group {
+//         justify-content: center;
+//         width: 100%;
+        
+//         .icon-service {
+//           margin: 0 10px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 480px) {
+//   .tf-car-service {
+//     // Estilos para mobile pequeno
+//     .content {
+//       .sub-title {
+//         font-size: 12px;
+//       }
+      
+//       .title {
+//         font-size: 15px;
+//       }
+      
+//       .price {
+//         font-size: 16px;
+//       }
+//     }
+    
+//     .exchange-info {
+//       font-size: 12px;
+//       padding: 4px 8px;
+//     }
+    
+//     .bottom-btn-wrap {
+//       .btn-read-more .more-link {
+//         padding: 10px 15px;
+//         font-size: 13px;
+//       }
+//     }
+//   }
+// }
+
+// Modo lista (se aplicável)
+.listing-list-car-list .tf-car-service {
+  @media only screen and (max-width: 1200px) {
+    flex-direction: column;
+    
+    > .image {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    .content {
+      width: 100%;
+      padding: 25px;
+    }
+    
+    .bottom-btn-wrap {
+      flex-direction: row;
+      border-left: none;
+      padding-left: 0;
+      margin-top: 25px;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .content {
+      padding: 20px;
+      
+      .description .listing-information .inner span {
+        display: none;
+      }
+    }
+    
+    .bottom-btn-wrap {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+}

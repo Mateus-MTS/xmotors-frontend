@@ -1,8 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import ListingImages from './ListingImages';
+import '../../Listing/_car-item.scss';
+import '../../Listing/_responsive-car-item.scss';
+// import '../../../assets/scss/_reset.scss';
 
-// Ícone SVG reutilizável
-const FeatureBadgeIcon = () => (
+// Ícone SVG 
+const IconPicture = () => (
   <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M12.296 14.0939C13.9707 14.0939 15.3284 12.8164 15.3284 11.2406C15.3284 9.66468 13.9707 8.38718 12.296 8.38718C10.6213 8.38718 9.26367 9.66468 9.26367 11.2406C9.26367 12.8164 10.6213 14.0939 12.296 14.0939Z"
@@ -16,69 +20,25 @@ const FeatureBadgeIcon = () => (
 );
 
 // Badge com condição e destaque
-const ConditionBadge = ({ condition, imageCount, featured }) => {
+const TagsPicture = ({ condition, imageCount, featured }) => {
   if (!featured) return null;
   const formatted = condition.charAt(0).toUpperCase() + condition.slice(1);
+
   return (
     <div className="feature">
       <span>{formatted}</span>
       <div className="cut">
-        <FeatureBadgeIcon />
+        <IconPicture />
         <p>{imageCount}</p>
       </div>
     </div>
   );
 };
 
-ConditionBadge.propTypes = {
+TagsPicture.propTypes = {
   condition: PropTypes.string.isRequired,
   imageCount: PropTypes.number.isRequired,
   featured: PropTypes.bool.isRequired,
-};
-
-// Imagem da galeria com possível overlay
-const GalleryItem = ({ image, alt, index, activeIndex, onHover, isLast }) => (
-  <div
-    className={`listing-item ${index === activeIndex ? 'active' : ''} ${isLast ? 'view-gallery' : ''}`}
-    onMouseEnter={() => onHover(index)}
-  >
-    <div className="images">
-      <img src={image} alt={alt} />
-      {isLast && (
-        <div className="overlay-limit">
-          <p>Veja mais 👉</p>
-        </div>
-      )}
-    </div>
-  </div>
-);
-
-GalleryItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  activeIndex: PropTypes.number.isRequired,
-  onHover: PropTypes.func.isRequired,
-  isLast: PropTypes.bool.isRequired,
-};
-
-// Bullets de navegação
-const GalleryBullets = ({ count, activeIndex, onHover }) => (
-  <div className="bullet-hover-listing">
-    {Array.from({ length: count }).map((_, i) => (
-      <div
-        key={i}
-        className={`bl-item ${activeIndex === i ? 'active' : ''}`}
-        onMouseEnter={() => onHover(i)}
-      />
-    ))}
-  </div>
-);
-
-GalleryBullets.propTypes = {
-  count: PropTypes.number.isRequired,
-  activeIndex: PropTypes.number.isRequired,
-  onHover: PropTypes.func.isRequired,
 };
 
 // Especificações técnicas do carro
@@ -112,45 +72,14 @@ const CarItem = ({
   acceptsExchange,
   images,
 }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const displayedImages = useMemo(() => images.slice(0, 4), [images]);
-  const hasMoreImages = images.length > 3;
-
   return (
     <div className="tf-car-service">
       <a href="listing-details.html" className="image">
         <div className="stm-badge-top">
-          <ConditionBadge
-            condition={condition}
-            imageCount={images.length}
-            featured={featured}
-          />
+          <TagsPicture condition={condition} imageCount={images.length} featured={featured} />
           <span>{year}</span>
         </div>
-
-        <div className="listing-images">
-          <div className="hover-listing-image">
-            <div className="wrap-hover-listing">
-              {displayedImages.map((img, i) => (
-                <GalleryItem
-                  key={i}
-                  image={img}
-                  alt={`car-${i}`}
-                  index={i}
-                  activeIndex={activeIndex}
-                  onHover={setActiveIndex}
-                  isLast={hasMoreImages && i === 3}
-                />
-              ))}
-
-              <GalleryBullets
-                count={displayedImages.length}
-                activeIndex={activeIndex}
-                onHover={setActiveIndex}
-              />
-            </div>
-          </div>
-        </div>
+        <ListingImages key={images.id} images={images} />
       </a>
 
       <div className="content">
@@ -160,7 +89,9 @@ const CarItem = ({
         </h6>
         <span className="price">R$ {price.toLocaleString()}</span>
 
-        {acceptsExchange && <p className="exchange-info">Aceita trocas</p>}
+        <p className="exchange-info">
+          {acceptsExchange ? 'Aceita trocas' : ''}
+        </p>
 
         <div className="description">
           <ul>

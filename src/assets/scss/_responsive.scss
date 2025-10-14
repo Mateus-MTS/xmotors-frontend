@@ -72,12 +72,6 @@
     }
 }
 @media only screen and (max-width: 1280px) {
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content {
-        padding: 33px;
-    }
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content .bottom-price-wrap .btn-read-more .more-link {
-        padding: 15px 15px;
-    }
     .dashboard .table-listing-inventory {
         overflow: scroll;
     }
@@ -131,28 +125,6 @@
         padding: 55px 45px 55px 45px;
     }
 
-
-    .tf-car-service .content {
-        padding: 16px 25px 37px 25px;
-    }
-
-    .tf-car-service .content .description ul li.listing-information .inner span {
-        display: none;
-    }
-
-    .tf-car-service .content .description ul li.listing-information i {
-        margin-right: 6px;
-        margin-top: 0px;
-    }
-
-    .tf-car-service .content .description ul li.listing-information:not(:last-child)::after {
-        display: none;
-    }
-
-    .tf-car-service .content .description ul li.listing-information:not(:last-child) {
-        margin-right: 12px;
-    }
-
     .border-line {
         margin-bottom: 30px;
     }
@@ -195,15 +167,6 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content {
-        flex-direction: column;
-    }
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content .bottom-price-wrap {
-        flex-direction: row;
-        border-left: unset;
-        padding-left: 0px;
-        margin-top: 30px;
-    }
     .tf-slide-v4 .slide-v4 .slide-v4-content h1 {
         font-size: 50px;
         line-height: 65px;
@@ -744,13 +707,6 @@
     .post-property .wrap-car-feature .tf-listing-info #tf-features {
         grid-template-columns: 1fr 1fr;
     }
-    
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content .listing-top-content .description .listing-information .inner span {
-        display: none;
-    }
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-content .listing-top-content .description .listing-information i {
-        margin-top: 2px;
-    }
     .listing-list-car-wrap .tab-listing-all .btn-condition-filter:not(:last-child) {
         margin-right: 15px;
     }
@@ -983,12 +939,6 @@
     }
     .widget-banner-car-listing {
         padding: 80px 15px 80px 15px;
-    }
-    .listing-list-car-grid.listing-list-car-list .listing-grid-item .listing-item-image {
-        max-width: 100%;
-    }
-    .listing-list-car-grid .listing-grid-item .listing-item-image .hover-listing-image {
-        min-height: 300px;
     }
     .listing-list-car-grid.listing-list-car-list .listing-grid-item {
         flex-direction: column;
