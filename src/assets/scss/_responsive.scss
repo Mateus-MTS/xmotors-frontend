@@ -1109,6 +1109,11 @@
     .search-form-widget ul li .nav-link {
         padding: 13px 13px;
         font-size: 14px;
+
+        & .mopped-svg {
+            height: 14px;
+            width: 18px;
+        }
     }
     .pd-bg {
         padding: 25px 30px;

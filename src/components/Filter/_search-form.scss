@@ -50,7 +50,7 @@
 
 
   & .tab-content {
-    padding: 10px 32px 38px 37px;
+    padding: 30px 32px 30px 32px;
     background-color: #ffffff;
     box-shadow: 0px 27px 18px 0px rgba(0, 0, 0, 0.06);
   }
@@ -141,8 +141,15 @@
   & .form-group {
     width: 100%;
 
-    & .button-search-listing i {
-      margin-right: 10px;
+    & .button-search-listing {
+      border-radius: 4px;
+      padding: 7.5px;
+      gap: 10px;
+      margin-top: 20px;
+
+      & .i {
+        margin-right: 10px;
+      }
     }
 
     & .nice-select {
@@ -315,15 +322,19 @@
       padding: 4px 4px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      background: #f5f5f5;
       color: #333;
       font-size: 14px;
       text-align: center;
+
+      &:focus {
+        border-color: #595960;
+        box-shadow: #595960;
+      }
     }
 
     & span {
       width: 10px;
-      margin: 4px;
+      margin: 0px 4px 0px 4px;
       max-width: 10px;
       text-align: center;
     }
@@ -338,15 +349,16 @@
 
   input {
     width: 100%;
-    padding: 10px 12px;
-    font-size: 14px;
+    padding: 4px 4px;
+    border-radius: 4px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
     outline: none;
 
     &:focus {
-      border-color: #4a90e2;
-      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+      border-color: #595960;
+      box-shadow: #595960;
     }
   }
 
