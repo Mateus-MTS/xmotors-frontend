@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './_index.scss';
 import Header from './common/Header/Header';
 import Slide from './Slide/Carousel/Carousel.jsx';
-import Filter from './Filter/FilterPanel/FilterPanel.jsx';
+import FilterPanel from './Filter/FilterPanel/FilterPanel.jsx';
 import ListingView from './Listing/Listing.jsx';
 import Footer from './Footer/Footer.jsx';
 import Preloader from './common/PreLoader/PreLoader.jsx';
@@ -59,7 +59,7 @@ function App() {
       
       <main>
         <Slide />
-        <Filter />
+        <FilterPanel />
         <ListingView />
       </main>
 

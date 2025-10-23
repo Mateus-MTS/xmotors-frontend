@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 import 'nouislider/dist/nouislider.css';
@@ -12,27 +13,36 @@ const toNumberOrNaN = (s) => {
   return Number.isNaN(n) ? NaN : n;
 };
 
-const YearRangeSlider = () => {
+const YearRangeSlider = ({ value, onChange }) => {
   const sliderRef = useRef(null);
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
 
-  const currentYear = new Date().getFullYear();
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
-  // valores efetivos
-  const [values, setValues] = useState([1990, currentYear]);
-  // estados de texto para inputs (permite digitação parcial)
+  const [localValues, setLocalValues] = useState([1990, currentYear]);
   const [texts, setTexts] = useState([String(1990), String(currentYear)]);
 
-  // aplica somente em mobile/tablet; hook adiciona listeners touchend
   useMobileSelectionToggle(minInputRef, maxInputRef);
 
-  // cria slider
+  useEffect(() => {
+    if (value) {
+      setLocalValues(value);
+      setTexts([String(value[0]), String(value[1])]);
+      
+      if (sliderRef.current?.noUiSlider) {
+        sliderRef.current.noUiSlider.set(value, false);
+      }
+    }
+  }, [value]);
+
   useEffect(() => {
     if (!sliderRef.current || sliderRef.current.noUiSlider) return;
 
+    const initialValues = value || [1990, currentYear];
+
     noUiSlider.create(sliderRef.current, {
-      start: values,
+      start: initialValues,
       step: 1,
       range: { min: MIN_YEAR, max: currentYear },
       connect: true,
@@ -41,43 +51,35 @@ const YearRangeSlider = () => {
 
     const slider = sliderRef.current.noUiSlider;
 
-    const onUpdate = (formattedValues) => {
+    slider.on('update', (formattedValues) => {
       const parsed = formattedValues.map((v) => {
         const n = parseInt(String(v).replace(/\D/g, ''), 10);
         return Number.isNaN(n) ? MIN_YEAR : n;
       });
 
-      setValues((prev) => {
-        if (prev[0] === parsed[0] && prev[1] === parsed[1]) return prev;
-        // atualiza também os textos para refletir estado do slider
-        setTexts([String(parsed[0]), String(parsed[1])]);
-        return parsed;
-      });
-    };
+      setLocalValues(parsed);
+      setTexts([String(parsed[0]), String(parsed[1])]);
+    });
 
-    slider.on('update', onUpdate);
+    slider.on('change', (formattedValues) => {
+      const parsed = formattedValues.map((v) => {
+        const n = parseInt(String(v).replace(/\D/g, ''), 10);
+        return Number.isNaN(n) ? MIN_YEAR : n;
+      });
+
+      if (onChange) {
+        onChange(parsed);
+      }
+    });
 
     return () => {
-      slider.off('update', onUpdate);
-      if (slider && typeof slider.destroy === 'function') slider.destroy();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentYear]);
-
-  // sincroniza slider quando values mudam por inputs (evita loop)
-  useEffect(() => {
-    if (sliderRef.current && sliderRef.current.noUiSlider) {
-      const slider = sliderRef.current.noUiSlider;
-      const current = slider.get().map((v) => parseInt(String(v).replace(/\D/g, ''), 10));
-      if (current[0] !== values[0] || current[1] !== values[1]) {
-        slider.set(values);
+      if (slider && typeof slider.destroy === 'function') {
+        slider.destroy();
       }
-    }
-  }, [values]);
+    };
+  }, []);
 
-  // atualiza texto enquanto digita; commita automaticamente se digitar 4 dígitos
   const handleTextChange = (index, raw) => {
-    // permite apenas dígitos e no máximo 4 caracteres
     const digits = onlyDigits(raw).slice(0, 4);
     setTexts((prev) => {
       const next = [...prev];
@@ -85,55 +87,72 @@ const YearRangeSlider = () => {
       return next;
     });
 
-    // se completou 4 dígitos, commita
     if (digits.length === 4) {
       const parsed = toNumberOrNaN(digits);
       commitValue(index, parsed);
     }
   };
 
-  // valida/normaliza e salva (executado em onBlur ou quando completar 4 dígitos)
   const commitValue = (index, parsedValue) => {
-    let [min, max] = values;
+    let [min, max] = localValues;
 
     const v = Number.isNaN(parsedValue)
       ? (index === 0 ? MIN_YEAR : currentYear)
       : parsedValue;
 
+    // ⭐ Garante que está dentro dos limites globais primeiro
+    const clampedVal = Math.max(MIN_YEAR, Math.min(currentYear, v));
+
     if (index === 0) {
-      // initial não pode ser maior que final
-      const newMin = Math.max(MIN_YEAR, Math.min(v, max));
-      min = newMin;
+      // Inicial não pode ser maior que final
+      min = clampedVal;
+      // ⭐ Se inicial ficou maior que final, ajusta final também
+      if (min > max) {
+        max = min;
+      }
     } else {
-      // final não pode ser menor que initial
-      const newMax = Math.min(currentYear, Math.max(v, min));
-      max = newMax;
+      // Final não pode ser menor que inicial
+      max = clampedVal;
+      // ⭐ Se final ficou menor que inicial, ajusta inicial também
+      if (max < min) {
+        min = max;
+      }
     }
 
     const next = [min, max];
-    setValues(next);
+    
+    setLocalValues(next);
     setTexts([String(min), String(max)]);
-    if (sliderRef.current && sliderRef.current.noUiSlider) {
+    
+    if (sliderRef.current?.noUiSlider) {
       sliderRef.current.noUiSlider.set(next);
+    }
+    
+    if (onChange) {
+      onChange(next);
     }
   };
 
   const handleBlur = (index) => {
-    // se campo vazio, considera NaN e commitValue aplicará MIN_YEAR/currentYear
     const parsed = toNumberOrNaN(texts[index]);
     commitValue(index, parsed);
   };
 
   const handlePaste = (e, index) => {
-    const text = (e.clipboardData && e.clipboardData.getData('text')) || window.clipboardData.getData('Text');
+    const text = (e.clipboardData && e.clipboardData.getData('text')) || 
+                  window.clipboardData?.getData('Text');
     const digits = onlyDigits(text).slice(0, 4);
     e.preventDefault();
+    
     setTexts((prev) => {
       const next = [...prev];
       next[index] = digits;
       return next;
     });
-    if (digits.length === 4) commitValue(index, toNumberOrNaN(digits));
+    
+    if (digits.length === 4) {
+      commitValue(index, toNumberOrNaN(digits));
+    }
   };
 
   return (
@@ -173,6 +192,16 @@ const YearRangeSlider = () => {
       <div id="slider-year-range" ref={sliderRef}></div>
     </div>
   );
+};
+
+YearRangeSlider.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.number),
+  onChange: PropTypes.func
+};
+
+YearRangeSlider.defaultProps = {
+  value: null,
+  onChange: null
 };
 
 export default YearRangeSlider;

@@ -5,52 +5,47 @@ import wNumb from 'wnumb';
 import 'nouislider/dist/nouislider.css';
 import useMobileSelectionToggle from '../../../hooks/useMobileSelectionToggle';
 
-
-ValueInitialInput.propTypes = {
-  idField: PropTypes.string,
+// Configurações por tipo de campo
+const FIELD_CONFIG = {
+  price: { min: 0, max: 1000000, initial: 1000, final: 500000 },
+  km: { min: 0, max: 300000, initial: 0, final: 300000 }
 };
 
-function ValueInitialInput({ idField }) {
-  if (idField === 'price') {
-    return 1000;
-  } else if (idField === 'km') {
-    return 0;
-  }
-};
-
-ValueFinalInput.propTypes = {
-  idField: PropTypes.string,
-};
-
-function ValueFinalInput({ idField }) {
-  if (idField === 'price') {
-    return 500000;
-  } else if (idField === 'km') {
-    return 300000;
-  }
-};
-
-
-const RangeSlider = ({ idField }) => {
+const RangeSlider = ({ idField, value, onChange }) => {
   const sliderRef = useRef(null);
-  const initialValue = ValueInitialInput({ idField });
-  const finalValue = ValueFinalInput({ idField });
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
 
-  const [values, setValues] = useState([initialValue, finalValue]);
+  // Busca configuração do campo ou usa padrão
+  const config = FIELD_CONFIG[idField] || FIELD_CONFIG.price;
+  
+  // Estado local
+  const [localValues, setLocalValues] = useState([config.initial, config.final]);
 
   useMobileSelectionToggle(minInputRef, maxInputRef);
 
+  // ⭐ Sincroniza quando valor externo mudar (reset!)
+  useEffect(() => {
+    if (value) {
+      setLocalValues(value);
+      if (sliderRef.current?.noUiSlider) {
+        sliderRef.current.noUiSlider.set(value, false); // false = não dispara eventos
+      }
+    }
+  }, [value]);
+
+  // Inicializa o noUiSlider
   useEffect(() => {
     if (!sliderRef.current || sliderRef.current.noUiSlider) return;
 
+    const initialValues = value || [config.initial, config.final];
+
     noUiSlider.create(sliderRef.current, {
-      start: values,
+      start: initialValues,
       step: 1,
       range: {
-        min: 0,
-        max: 1000000
+        min: config.min,
+        max: config.max
       },
       connect: true,
       format: wNumb({ decimals: 0, thousand: ',' })
@@ -58,43 +53,77 @@ const RangeSlider = ({ idField }) => {
 
     const slider = sliderRef.current.noUiSlider;
 
+    // ⭐ 'update' apenas para atualizar estado local (visual)
     slider.on('update', (formattedValues) => {
       const parsed = formattedValues.map((val) => Number(val.replace(/,/g, '')));
-      setValues(parsed);
+      setLocalValues(parsed);
+    });
+
+    // ⭐ 'change' só dispara quando usuário SOLTA (muito mais performático!)
+    slider.on('change', (formattedValues) => {
+      const parsed = formattedValues.map((val) => Number(val.replace(/,/g, '')));
+      
+      // Notifica componente pai só quando terminar de arrastar
+      if (onChange) {
+        onChange(parsed);
+      }
     });
 
     return () => {
-      slider.destroy();
+      if (slider && typeof slider.destroy === 'function') {
+        slider.destroy();
+      }
     };
-  }, []);
+  }, []); // Só cria uma vez
+
+  // Handler para input manual
+  const handleInputChange = (index, rawValue) => {
+    const val = parseInt(rawValue.replace(/\D/g, '')) || 0;
+    
+    // Garante que está dentro dos limites
+    const clampedVal = Math.max(config.min, Math.min(config.max, val));
+    
+    const newValues = [...localValues];
+    newValues[index] = clampedVal;
+    
+    // Garante que min <= max
+    if (index === 0 && newValues[0] > newValues[1]) {
+      newValues[1] = newValues[0];
+    } else if (index === 1 && newValues[1] < newValues[0]) {
+      newValues[0] = newValues[1];
+    }
+    
+    setLocalValues(newValues);
+    
+    // Atualiza slider
+    if (sliderRef.current?.noUiSlider) {
+      sliderRef.current.noUiSlider.set(newValues);
+    }
+    
+    // Notifica componente pai
+    if (onChange) {
+      onChange(newValues);
+    }
+  };
 
   return (
     <div className="widget widget-price">
-      <div className="caption flex-two">
-      </div>
-
       <div className="slider-labels">
         <div className="number-range">
           <input
             ref={minInputRef}
             type="text"
-            value={Number(values[0]).toLocaleString('pt-BR')}
-            onChange={(e) => {
-              const val = parseInt(e.target.value.replace(/\D/g, '')) || 0;
-              setValues([val, values[1]]);
-              sliderRef.current.noUiSlider.set([val, null]);
-            }}
+            value={Number(localValues[0]).toLocaleString('pt-BR')}
+            onChange={(e) => handleInputChange(0, e.target.value)}
+            aria-label={`Valor mínimo de ${idField}`}
           />
           <span>–</span>
           <input
             ref={maxInputRef}
             type="text"
-            value={Number(values[1]).toLocaleString('pt-BR')}
-            onChange={(e) => {
-              const val = parseInt(e.target.value.replace(/\D/g, '')) || 0;
-              setValues([values[0], val]);
-              sliderRef.current.noUiSlider.set([null, val]);
-            }}
+            value={Number(localValues[1]).toLocaleString('pt-BR')}
+            onChange={(e) => handleInputChange(1, e.target.value)}
+            aria-label={`Valor máximo de ${idField}`}
           />
         </div>
       </div>
@@ -104,8 +133,15 @@ const RangeSlider = ({ idField }) => {
   );
 };
 
+RangeSlider.propTypes = {
+  idField: PropTypes.oneOf(['price', 'km']).isRequired,
+  value: PropTypes.arrayOf(PropTypes.number),
+  onChange: PropTypes.func
+};
+
 RangeSlider.defaultProps = {
-  idField: PropTypes.string,
+  value: null,
+  onChange: null
 };
 
 export default RangeSlider;

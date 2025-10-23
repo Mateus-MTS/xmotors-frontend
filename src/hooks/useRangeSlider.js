@@ -7,13 +7,36 @@ export default function useRangeSlider(config = {}) {
     initialRange = [min, max],
     step = 1,
     rangeSelector = '.range-slider',
-    onChange
+    onChange,
+    value
   } = config;
 
-  const [values, setValues] = useState(initialRange);
+  // ⭐ Usa valor externo se fornecido, senão usa initialRange
+  const [values, setValues] = useState(value || initialRange);
   const rangeRef = useRef(null);
   const inputsRef = useRef([]);
   const slidersRef = useRef([]);
+
+  // ⭐ NOVO: Sincroniza com valor externo quando ele mudar (reset!)
+  useEffect(() => {
+    if (value && (value[0] !== values[0] || value[1] !== values[1])) {
+      setValues(value);
+      
+      // Atualiza também os inputs visualmente
+      inputsRef.current.forEach((input, idx) => {
+        if (input && !isNaN(value[idx])) {
+          input.value = value[idx];
+        }
+      });
+
+      // Atualiza sliders visualmente
+      slidersRef.current.forEach((slider, idx) => {
+        if (slider && !isNaN(value[idx])) {
+          slider.value = value[idx];
+        }
+      });
+    }
+  }, [value]); // Executa quando value externo mudar
 
   // Função de sincronização com tratamento de erros
   const syncValues = (newValues) => {
@@ -22,7 +45,7 @@ export default function useRangeSlider(config = {}) {
       const sorted = [Math.min(val1, val2), Math.max(val1, val2)];
       
       setValues(sorted);
-      if (onChange) onChange(sorted);
+      if (onChange) onChange(sorted); // ⭐ Notifica componente pai
 
       // Atualiza os inputs
       inputsRef.current.forEach((input, idx) => {
@@ -92,7 +115,7 @@ export default function useRangeSlider(config = {}) {
 
     initSlider();
     return cleanup;
-  }, [min, max, step, values]);
+  }, [min, max, step]); // ⭐ REMOVIDO 'values' daqui pra evitar loop infinito
 
   return {
     values,
