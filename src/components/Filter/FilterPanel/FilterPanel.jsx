@@ -10,6 +10,16 @@ function FilterPanel() {
     const [activeType, setActiveType] = useState("car");
     const { filters, updateFilter, resetFilters } = useFilterState();
 
+    const fuelTypes = [
+        { display_name: 'Gasolina' },
+        { display_name: 'Álcool' },
+        { display_name: 'Diesel' },
+        { display_name: 'Flex' },
+        { display_name: 'Elétrico' },
+        { display_name: 'Híbrido' },
+        { display_name: 'GNV' },
+    ];
+
     // Configuração dos veículos
     const vehicles = [
         { type: 'car', icon: faCar, label: 'Carro' },
@@ -74,6 +84,7 @@ function FilterPanel() {
                                 filters={filters}
                                 updateFilter={updateFilter}
                                 onSubmit={handleSubmit}
+                                fuelTypes={fuelTypes}
                             />
                         ))}
                     </div>
@@ -85,7 +96,7 @@ function FilterPanel() {
 }
 
 // Componente genérico de tab
-function VehicleTab({ type, activeType, filters, updateFilter, onSubmit }) {
+function VehicleTab({ type, activeType, filters, updateFilter, onSubmit, fuelTypes }) {
     const isActive = activeType === type;
 
     return (
@@ -99,13 +110,21 @@ function VehicleTab({ type, activeType, filters, updateFilter, onSubmit }) {
                 filters={filters}
                 updateFilter={updateFilter}
                 onSubmit={onSubmit}
+                fuelTypes={fuelTypes}
             />
         </div>
     );
 }
 
 // Formulário de busca (agora usando as props corretamente!)
-function SearchForm({ filters, updateFilter, onSubmit }) {
+function SearchForm({ filters, updateFilter, onSubmit, fuelTypes }) {
+    const [showFuelOptions, setShowFuelOptions] = useState(false);
+
+    function handleSelectFuel(fuel) {
+        updateFilter("fuel", fuel);
+        setShowFuelOptions(false);
+    }
+
     return (
         <form onSubmit={onSubmit}>
             <div className="inner-group grid">
@@ -150,9 +169,20 @@ function SearchForm({ filters, updateFilter, onSubmit }) {
                         <input
                             type="text"
                             value={filters.fuel}
-                            onChange={(e) => updateFilter("fuel", e.target.value)}
-                            placeholder="Todos"
+                            onFocus={() => setShowFuelOptions(true)}
+                            onBlur={() => setTimeout(() => setShowFuelOptions(false), 150)} // pequeno delay pra permitir o clique
+                            placeholder="Selecione"
+                            readOnly // impede digitação — vira um combobox
                         />
+                        {showFuelOptions && (
+                            <ul className="suggestions">
+                                {fuelTypes.map((item, i) => (
+                                    <li key={i} onClick={() => handleSelectFuel(item.display_name)}>
+                                        {item.display_name}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </div>
 
