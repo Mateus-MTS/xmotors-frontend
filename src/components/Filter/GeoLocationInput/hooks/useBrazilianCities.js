@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchBrazilianCities } from '../services/locationService';
+import { fetchBrazilianCities } from '../../../../services/locationService';
 
 export const useBrazilianCities = () => {
   return useQuery({

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchCitiesByDDD } from '../services/locationService';
+import { fetchCitiesByDDD } from '../../../../services/locationService';
 
 export const useDDDSearch = (ddd) => {
   return useQuery({
