@@ -1,36 +1,43 @@
 /**
- * GeoLocationInput - Componente Principal
+ * GeoLocationInput - Componente Principal (Otimizado)
  * 
- * Responsabilidades:
- * - Orquestrar todos os subcomponentes
- * - Gerenciar estado do input
- * - Coordenar busca e seleção
- * - Interface entre props e lógica interna
+ * Agora consome dados do Provider ao invés de carregá-los
  */
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from '../../../utils/utils';
-import { useBrazilianCities } from './hooks/useBrazilianCities';
+import { useGeoLocationContext } from './GeoLocationProvider';
 import { useGeoLocationSearch } from './hooks/useGeoLocationSearch';
-import { useCurrentLocation } from './hooks/useCurrentLocation';
 import LocationOptions from './components/LocationOptions';
 import SuggestionsList from './components/SuggestionsList';
 import logger from '../../../utils/logger';
 
 const GeoLocationInput = ({ value, onChange }) => {
   // ============================================
+  // CONTEXTO - Dados compartilhados
+  // ============================================
+  const {
+    cities,
+    isLoading,
+    isError,
+    placeholderLocation: contextPlaceholder,
+    initialLocation,
+    isInitialized,
+    getCurrentRegion,
+    getCurrentState
+  } = useGeoLocationContext();
+
+  // ============================================
   // ESTADOS
   // ============================================
   const [query, setQuery] = useState('');
   const [showOptions, setShowOptions] = useState(false);
-  const [placeholderLocation, setPlaceholderLocation] = useState('Buscando localização...');
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   // ============================================
   // HOOKS CUSTOMIZADOS
   // ============================================
-  const { data: cities, isLoading, isError, error } = useBrazilianCities();
-  
   const {
     suggestions,
     performSearch,
@@ -38,18 +45,11 @@ const GeoLocationInput = ({ value, onChange }) => {
     clearSuggestions
   } = useGeoLocationSearch(cities);
 
-  const {
-    getCurrentRegion,
-    getCurrentState,
-    setupInitialLocation,
-    isLoadingLocation
-  } = useCurrentLocation(cities);
-
   // ============================================
   // REFS
   // ============================================
   const inputRef = useRef();
-  
+
   // Debounce criado uma vez só
   const debouncedSearch = useRef(
     debounce((query) => performSearch(query), 300)
@@ -61,46 +61,8 @@ const GeoLocationInput = ({ value, onChange }) => {
   useEffect(() => {
     if (value !== undefined && value !== query) {
       setQuery(value);
-      if (value === '') {
-        setPlaceholderLocation('Busque por estado, região, DDD, zona, bairro ou cidade');
-      }
     }
   }, [value, query]);
-
-  // ============================================
-  // EFFECTS - Carregamento de dados
-  // ============================================
-  useEffect(() => {
-    if (cities) {
-      logger.dataLoaded('Cidades carregadas', { count: cities.length });
-      setupInitialLocationAsync();
-    }
-  }, [cities]);
-
-  useEffect(() => {
-    if (isError) {
-      logger.error('Erro ao carregar cidades', error);
-      setPlaceholderLocation('Erro ao carregar cidades');
-    }
-  }, [isError, error]);
-
-  // ============================================
-  // HANDLERS - Setup inicial
-  // ============================================
-  const setupInitialLocationAsync = async () => {
-    const { location, placeholder } = await setupInitialLocation();
-    
-    if (location) {
-      setQuery(location);
-      setPlaceholderLocation(placeholder);
-      
-      if (onChange) {
-        onChange(location);
-      }
-    } else {
-      setPlaceholderLocation(placeholder);
-    }
-  };
 
   // ============================================
   // HANDLERS - Input
@@ -108,10 +70,14 @@ const GeoLocationInput = ({ value, onChange }) => {
   const handleInputChange = (e) => {
     const newValue = e.target.value;
     logger.input('Input mudou', { newValue });
-    
+
+    if (!hasInitialized) {
+      setHasInitialized(true);
+    }
+
     setQuery(newValue);
     debouncedSearch(newValue);
-    
+
     if (onChange) {
       onChange(newValue);
     }
@@ -119,7 +85,7 @@ const GeoLocationInput = ({ value, onChange }) => {
 
   const handleFocus = () => {
     logger.focus('Input focado', { query });
-    
+
     if (query === '') {
       setShowOptions(true);
     }
@@ -136,16 +102,23 @@ const GeoLocationInput = ({ value, onChange }) => {
     }
   };
 
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShowOptions(false);
+      clearSuggestions();
+    }, 150);
+  };
+
   // ============================================
   // HANDLERS - Seleção
   // ============================================
   const handleSelect = (item) => {
     if (item.isLoading) return;
-    
+
     logger.info('Item selecionado', { item });
-    
+
     let displayValue;
-    
+
     // Tratamento especial para resumo de DDD
     if (item.isDDDSummary) {
       displayValue = `${item.display_name} - DDD ${item.ddd}`;
@@ -154,11 +127,11 @@ const GeoLocationInput = ({ value, onChange }) => {
     } else {
       displayValue = item.display_name;
     }
-    
+
     setQuery(displayValue);
     clearSearch();
     setShowOptions(false);
-    
+
     if (onChange) {
       onChange(displayValue);
     }
@@ -170,7 +143,26 @@ const GeoLocationInput = ({ value, onChange }) => {
   const handleMyRegion = async () => {
     logger.info('Botão "Minha região" clicado');
     setShowOptions(false);
-    
+
+    // Buscar o DDD da localização atual
+    if (initialLocation && cities) {
+      // Extrair cidade da localização (formato: "Cidade, Estado")
+      const cityName = initialLocation.split(',')[0].trim();
+
+      // Buscar a cidade nos dados
+      const city = cities.find(c => c.name === cityName);
+
+      if (city && city.ddd) {
+        const dddQuery = city.ddd;
+        setQuery(dddQuery);
+        performSearch(dddQuery);
+        if (onChange) onChange(dddQuery);
+        logger.info('Busca por DDD da região', { ddd: city.ddd });
+        return;
+      }
+    }
+
+    // Fallback: usar a localização completa
     const location = await getCurrentRegion();
     if (location) {
       setQuery(location);
@@ -181,7 +173,7 @@ const GeoLocationInput = ({ value, onChange }) => {
   const handleMyState = async () => {
     logger.info('Botão "Meu estado" clicado');
     setShowOptions(false);
-    
+
     const location = await getCurrentState();
     if (location) {
       setQuery(location);
@@ -204,17 +196,18 @@ const GeoLocationInput = ({ value, onChange }) => {
       <input
         ref={inputRef}
         type="text"
-        placeholder={isLoading ? 'Carregando cidades...' : placeholderLocation}
+        placeholder={isLoading ? 'Carregando cidades...' : 'Busque por DDD, Cidade ou Estado'}
         value={query}
         onChange={handleInputChange}
         onFocus={handleFocus}
+        onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         disabled={isLoading}
         aria-label="Localização"
         aria-autocomplete="list"
         aria-expanded={suggestions.length > 0 || showOptions}
       />
-      
+
       <LocationOptions
         visible={showOptions}
         onMyRegion={handleMyRegion}
@@ -222,13 +215,13 @@ const GeoLocationInput = ({ value, onChange }) => {
         onAllBrazil={handleAllBrazil}
         isLoading={isLoading}
       />
-      
+
       <SuggestionsList
         suggestions={suggestions}
         onSelect={handleSelect}
         visible={!showOptions}
       />
-      
+
       {isError && (
         <div className="error-message">
           Erro ao carregar cidades. Tente novamente.

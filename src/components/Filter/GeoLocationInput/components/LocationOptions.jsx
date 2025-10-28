@@ -51,6 +51,7 @@ const LocationOptions = ({
 
   return (
     <div className="location-options">
+      <span className="options-title">Busque por DDD, Cidade ou Estado</span>
       <span className="options-title">Localização automática</span>
       <div className="options-buttons">
         <OptionButton

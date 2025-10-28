@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import useFilterState from "../../../hooks/useFilterState";
 import RangeSlider from '../RangeSlider/RangeSlider';
 import GeoLocation from '../GeoLocationInput/GeoLocationInput';
+import { GeoLocationProvider } from '../GeoLocationInput/GeoLocationProvider';
 import YearRangeSlider from '../RangeSlider/YearRangeSlider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faTruck, faBus, faMotorcycle } from '@fortawesome/free-solid-svg-icons';
@@ -43,55 +44,57 @@ function FilterPanel() {
     }
 
     return (
-        <div className="widget-search-car">
-            <div className="themesflat-container">
-                <div className="search-form-widget">
+        <GeoLocationProvider>
+            <div className="widget-search-car">
+                <div className="themesflat-container">
+                    <div className="search-form-widget">
 
-                    {/* Tabs de navegação */}
-                    <ul className="nav nav-tabs" id="myTab" role="tablist">
-                        {vehicles.map((vehicle) => (
-                            <li key={vehicle.type} className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link ${activeType === vehicle.type ? "active" : ""}`}
-                                    id={`${vehicle.type}-tab`}
-                                    data-bs-toggle="tab"
-                                    data-bs-target={`#${vehicle.type}`}
-                                    type="button"
-                                    role="tab"
-                                    aria-controls={vehicle.type}
-                                    aria-selected={activeType === vehicle.type}
-                                    onClick={() => handleTabChange(vehicle.type)}
-                                >
-                                    <i>
-                                        {vehicle.customSvg ? (
-                                            <MotoSvg />
-                                        ) : (
-                                            <FontAwesomeIcon icon={vehicle.icon} />
-                                        )}
-                                    </i>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                        {/* Tabs de navegação */}
+                        <ul className="nav nav-tabs" id="myTab" role="tablist">
+                            {vehicles.map((vehicle) => (
+                                <li key={vehicle.type} className="nav-item" role="presentation">
+                                    <button
+                                        className={`nav-link ${activeType === vehicle.type ? "active" : ""}`}
+                                        id={`${vehicle.type}-tab`}
+                                        data-bs-toggle="tab"
+                                        data-bs-target={`#${vehicle.type}`}
+                                        type="button"
+                                        role="tab"
+                                        aria-controls={vehicle.type}
+                                        aria-selected={activeType === vehicle.type}
+                                        onClick={() => handleTabChange(vehicle.type)}
+                                    >
+                                        <i>
+                                            {vehicle.customSvg ? (
+                                                <MotoSvg />
+                                            ) : (
+                                                <FontAwesomeIcon icon={vehicle.icon} />
+                                            )}
+                                        </i>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
 
-                    {/* Conteúdo das tabs */}
-                    <div className="tab-content" id="myTabContent">
-                        {vehicles.map((vehicle) => (
-                            <VehicleTab
-                                key={vehicle.type}
-                                type={vehicle.type}
-                                activeType={activeType}
-                                filters={filters}
-                                updateFilter={updateFilter}
-                                onSubmit={handleSubmit}
-                                fuelTypes={fuelTypes}
-                            />
-                        ))}
+                        {/* Conteúdo das tabs */}
+                        <div className="tab-content" id="myTabContent">
+                            {vehicles.map((vehicle) => (
+                                <VehicleTab
+                                    key={vehicle.type}
+                                    type={vehicle.type}
+                                    activeType={activeType}
+                                    filters={filters}
+                                    updateFilter={updateFilter}
+                                    onSubmit={handleSubmit}
+                                    fuelTypes={fuelTypes}
+                                />
+                            ))}
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
+        </GeoLocationProvider>
     );
 }
 
@@ -170,9 +173,9 @@ function SearchForm({ filters, updateFilter, onSubmit, fuelTypes }) {
                             type="text"
                             value={filters.fuel}
                             onFocus={() => setShowFuelOptions(true)}
-                            onBlur={() => setTimeout(() => setShowFuelOptions(false), 150)} // pequeno delay pra permitir o clique
+                            onBlur={() => setTimeout(() => setShowFuelOptions(false), 150)}
                             placeholder="Selecione"
-                            readOnly // impede digitação — vira um combobox
+                            readOnly
                         />
                         {showFuelOptions && (
                             <ul className="suggestions">
