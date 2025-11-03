@@ -1,130 +1,244 @@
+/**
+ * GeoLocationInput - Componente Principal (Otimizado)
+ * 
+ * Agora consome dados do Provider ao invés de carregá-los
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
-import { normalize, debounce } from '../Utils/utils';
-import { getCachedData, saveToCache } from '../Utils/cacheService';
-import * as LocationService from '../Services/locationService';
+import PropTypes from 'prop-types';
+import { debounce } from '../../../utils/utils';
+import { useGeoLocationContext } from './GeoLocationProvider';
+import { useGeoLocationSearch } from './hooks/useGeoLocationSearch';
+import LocationOptions from './components/LocationOptions';
+import SuggestionsList from './components/SuggestionsList';
+import logger from '../../../utils/logger';
 
-const GeoLocationInput = ({ onSelect }) => {
+const GeoLocationInput = ({ value, onChange }) => {
+  // ============================================
+  // CONTEXTO - Dados compartilhados
+  // ============================================
+  const {
+    cities,
+    isLoading,
+    isError,
+    placeholderLocation: contextPlaceholder,
+    initialLocation,
+    isInitialized,
+    getCurrentRegion,
+    getCurrentState
+  } = useGeoLocationContext();
+
+  // ============================================
+  // ESTADOS
+  // ============================================
   const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [placeholderLocation, setPlaceholderLocation] = useState('Buscando localização...');
-  const [selectedValue, setSelectedValue] = useState('');
-  const memoryCache = useRef([]);
-  useEffect(() => {
-    init();
-    setupCurrentLocation();
-  }, []);
+  const [showOptions, setShowOptions] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-  const init = async () => {
-    const cachedData = getCachedData();
-    if (cachedData) {
-      memoryCache.current = cachedData;
-      return;
+  // ============================================
+  // HOOKS CUSTOMIZADOS
+  // ============================================
+  const {
+    suggestions,
+    performSearch,
+    clearSearch,
+    clearSuggestions
+  } = useGeoLocationSearch(cities);
+
+  // ============================================
+  // REFS
+  // ============================================
+  const inputRef = useRef();
+
+  // Debounce criado uma vez só
+  const debouncedSearch = useRef(
+    debounce((query) => performSearch(query), 300)
+  ).current;
+
+  // ============================================
+  // EFFECTS - Sincronização com props
+  // ============================================
+  useEffect(() => {
+    if (value !== undefined && value !== query) {
+      setQuery(value);
+    }
+  }, [value, query]);
+
+  // ============================================
+  // HANDLERS - Input
+  // ============================================
+  const handleInputChange = (e) => {
+    const newValue = e.target.value;
+    logger.input('Input mudou', { newValue });
+
+    if (!hasInitialized) {
+      setHasInitialized(true);
     }
 
-    const cities = await LocationService.fetchBrazilianCities();
-    memoryCache.current = cities;
-    saveToCache(cities);
-  };
+    setQuery(newValue);
+    debouncedSearch(newValue);
 
-  const setupCurrentLocation = async () => {
-    try {
-      const position = await LocationService.getCurrentLocation();
-      const { coords: { latitude, longitude } } = position;
-      const data = await LocationService.reverseGeocode(latitude, longitude);
-
-      if (data.address.country === 'Brazil' || data.address.country_code === 'br') {
-        handleBrazilianLocation(data);
-      } else {
-        setPlaceholderLocation('Fora do Brasil');
-      }
-    } catch (err) {
-      console.error('Erro ao buscar localização:', err);
-      setPlaceholderLocation(err.message === 'User denied Geolocation'
-        ? 'Permissão negada'
-        : 'Erro ao obter localização');
+    if (onChange) {
+      onChange(newValue);
     }
   };
 
-  const handleBrazilianLocation = (data) => {
-    const cidade = data.address.city || data.address.town || '';
-    const estado = data.address.state || '';
-    const country = data.address.country || '';
+  const handleFocus = () => {
+    logger.focus('Input focado', { query });
 
-    const cidadeUF = LocationService.findLocationInCache(memoryCache.current, cidade, estado);
-    const location = cidadeUF?.display_name || [cidade, estado, country].filter(Boolean).join(', ');
-
-    setSelectedValue(location);
-    setQuery(location);
-    setPlaceholderLocation(location);
+    if (query === '') {
+      setShowOptions(true);
+    }
   };
 
-  const handleSearch = (query) => {
-    if (query === '') { return setPlaceholderLocation('Localização'); }
-
-    const q = normalize(query);
-    if (q.length < 1) return setSuggestions([]);
-
-    // 🔍 Buscar nas cidades
-    const cityResults = memoryCache.current.filter(item =>
-      normalize(item.name).includes(q)
-    );
-
-    // 🔍 Buscar nos estados (code ou name)
-    const stateResults = LocationService.States.filter(state =>
-      normalize(state.name).includes(q) || normalize(state.code).startsWith(q)
-    ).map(state => ({
-      display_name: `${state.name} - UF`,
-      name: state.name,
-      state: state.code
-    }));
-
-    // Combinar tudo (evita duplicados)
-    const combinedResults = [...stateResults, ...cityResults];
-
-    setSuggestions(combinedResults.slice(0, 10));
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      clearSuggestions();
+      setShowOptions(false);
+    } else if (e.key === 'Escape') {
+      clearSearch();
+      setShowOptions(false);
+    }
   };
 
-  const debouncedSearch = debounce(handleSearch, 300);
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShowOptions(false);
+      clearSuggestions();
+    }, 150);
+  };
 
-  useEffect(() => {
-    debouncedSearch(query);
-  }, [query]);
-
+  // ============================================
+  // HANDLERS - Seleção
+  // ============================================
   const handleSelect = (item) => {
-    setQuery(item.display_name);
-    setSuggestions([]);
-    onSelect?.(item);
+    if (item.isLoading) return;
+
+    logger.info('Item selecionado', { item });
+
+    let displayValue;
+
+    // Tratamento especial para resumo de DDD
+    if (item.isDDDSummary) {
+      displayValue = `${item.display_name} - DDD ${item.ddd}`;
+    } else if (item.isDDD) {
+      displayValue = `${item.display_name}, ${item.state}`;
+    } else {
+      displayValue = item.display_name;
+    }
+
+    setQuery(displayValue);
+    clearSearch();
+    setShowOptions(false);
+
+    if (onChange) {
+      onChange(displayValue);
+    }
   };
 
+  // ============================================
+  // HANDLERS - Botões de localização
+  // ============================================
+  const handleMyRegion = async () => {
+    logger.info('Botão "Minha região" clicado');
+    setShowOptions(false);
 
+    // Buscar o DDD da localização atual
+    if (initialLocation && cities) {
+      // Extrair cidade da localização (formato: "Cidade, Estado")
+      const cityName = initialLocation.split(',')[0].trim();
+
+      // Buscar a cidade nos dados
+      const city = cities.find(c => c.name === cityName);
+
+      if (city && city.ddd) {
+        const dddQuery = city.ddd;
+        setQuery(dddQuery);
+        performSearch(dddQuery);
+        if (onChange) onChange(dddQuery);
+        logger.info('Busca por DDD da região', { ddd: city.ddd });
+        return;
+      }
+    }
+
+    // Fallback: usar a localização completa
+    const location = await getCurrentRegion();
+    if (location) {
+      setQuery(location);
+      if (onChange) onChange(location);
+    }
+  };
+
+  const handleMyState = async () => {
+    logger.info('Botão "Meu estado" clicado');
+    setShowOptions(false);
+
+    const location = await getCurrentState();
+    if (location) {
+      setQuery(location);
+      if (onChange) onChange(location);
+    }
+  };
+
+  const handleAllBrazil = () => {
+    logger.info('Botão "Todo Brasil" clicado');
+    setShowOptions(false);
+    setQuery('Em todo Brasil');
+    if (onChange) onChange('Em todo Brasil');
+  };
+
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <div className="geo-autocomplete">
       <input
+        ref={inputRef}
         type="text"
-        placeholder={placeholderLocation}
+        placeholder={isLoading ? 'Carregando cidades...' : 'Busque por DDD, Cidade ou Estado'}
         value={query}
-        onChange={(e) => {
-          setQuery(e.target.value);
-          setSelectedValue('');
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            setSuggestions([]);
-          }
-        }}
+        onChange={handleInputChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        disabled={isLoading}
+        aria-label="Localização"
+        aria-autocomplete="list"
+        aria-expanded={suggestions.length > 0 || showOptions}
       />
-      {suggestions.length > 0 && (
-        <ul className="suggestions">
-          {suggestions.map((item, i) => (
-            <li key={i} onClick={() => handleSelect(item)}>
-              {item.display_name}
-            </li>
-          ))}
-        </ul>
+
+      <LocationOptions
+        visible={showOptions}
+        onMyRegion={handleMyRegion}
+        onMyState={handleMyState}
+        onAllBrazil={handleAllBrazil}
+        isLoading={isLoading}
+      />
+
+      <SuggestionsList
+        suggestions={suggestions}
+        onSelect={handleSelect}
+        visible={!showOptions}
+      />
+
+      {isError && (
+        <div className="error-message">
+          Erro ao carregar cidades. Tente novamente.
+        </div>
       )}
     </div>
   );
+};
+
+GeoLocationInput.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func
+};
+
+GeoLocationInput.defaultProps = {
+  value: undefined,
+  onChange: null
 };
 
 export default GeoLocationInput;
