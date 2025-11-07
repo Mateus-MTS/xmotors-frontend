@@ -319,17 +319,20 @@ export default function CarBrandFilter(filters) {
 
       {/* Estilos CSS-in-JS */}
       <style>{`
+        /* Ajustes no filter-container */
         .filter-container {
           max-width: 1350px;
-          margin: 0 auto;
           padding: 2rem 1rem;
           background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #000 100%);
           min-height: 400px;
           border-radius: 20px;
+          margin-top: 30px;
         }
 
         .search-section {
           margin-bottom: 3rem;
+          position: relative; /* ADICIONADO */
+          z-index: 100; /* AUMENTADO - deve estar acima do carrossel */
         }
 
         .search-bar {
@@ -341,17 +344,34 @@ export default function CarBrandFilter(filters) {
           border-radius: 16px;
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
           backdrop-filter: blur(10px);
+          position: relative; /* ADICIONADO */
+          z-index: 101; /* ADICIONADO */
         }
 
         .search-field {
           position: relative;
           display: flex;
           align-items: center;
+          z-index: 102; /* ADICIONADO */
         }
 
         .location-field {
           border-right: 1px solid #e5e7eb;
           padding-right: 1rem;
+          z-index: 103; /* ADICIONADO - deve ser o mais alto na search-bar */
+        }
+
+        /* CRÍTICO: Garantir que o geo-autocomplete tenha z-index alto */
+        .geo-autocomplete {
+          position: relative;
+          z-index: 10000 !important; /* AUMENTADO drasticamente */
+        }
+
+        /* CRÍTICO: Dropdown deve estar acima de tudo */
+        .geo-autocomplete .suggestions,
+        .geo-autocomplete .location-options {
+          position: absolute;
+          z-index: 99999 !important; /* MÁXIMO */
         }
 
         .field-icon {
@@ -395,11 +415,14 @@ export default function CarBrandFilter(filters) {
           box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
         }
 
+        /* Carrossel - z-index BAIXO para não interferir */
         .brand-carousel-container {
           position: relative;
           display: flex;
           align-items: center;
           gap: 1rem;
+          z-index: 1; /* BAIXO - deve ficar atrás do search */
+          isolation: isolate; /* ADICIONADO - isola o contexto de empilhamento */
         }
 
         .carousel-nav {
@@ -416,8 +439,9 @@ export default function CarBrandFilter(filters) {
           cursor: pointer;
           transition: all 0.3s;
           backdrop-filter: blur(10px);
-          z-index: 2;
           font-size: 1.25rem;
+          position: relative; /* ADICIONADO */
+          z-index: 2; /* BAIXO */
         }
 
         .carousel-nav:hover {
@@ -434,6 +458,8 @@ export default function CarBrandFilter(filters) {
           scrollbar-width: none;
           -ms-overflow-style: none;
           cursor: grab;
+          position: relative; /* ADICIONADO */
+          z-index: 1; /* BAIXO */
         }
 
         .brands-scroll:active {
@@ -458,12 +484,15 @@ export default function CarBrandFilter(filters) {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           min-width: 120px;
           backdrop-filter: blur(10px);
+          position: relative; /* ADICIONADO */
+          z-index: 1; /* BAIXO */
         }
 
         .brand-card:hover {
           background: rgba(255, 255, 255, 0.1);
           transform: translateY(-4px) scale(1.02);
           border: 2px solid rgba(255, 255, 255, 0.2);
+          z-index: 2; /* Sobe um pouco no hover, mas ainda baixo */
         }
 
         .brand-card.selected {
@@ -474,6 +503,7 @@ export default function CarBrandFilter(filters) {
             0 0 30px var(--brand-color),
             0 0 60px rgba(255, 255, 255, 0.3),
             0 20px 40px rgba(0, 0, 0, 0.4);
+          z-index: 3; /* Selecionado fica mais alto, mas ainda baixo */
         }
 
         .brand-icon {
@@ -487,12 +517,14 @@ export default function CarBrandFilter(filters) {
           font-weight: 700;
           color: white;
           transition: all 0.4s;
+          pointer-events: none;
         }
 
         .brand-icon img {
           max-width: 100%;
           max-height: 100%;
           object-fit: contain;
+          pointer-events: none;
         }
 
         .brand-card.selected .brand-icon {
@@ -505,6 +537,7 @@ export default function CarBrandFilter(filters) {
           color: rgba(255, 255, 255, 0.7);
           transition: all 0.3s;
           text-align: center;
+          pointer-events: none;
         }
 
         .brand-card.selected .brand-name {
@@ -529,6 +562,12 @@ export default function CarBrandFilter(filters) {
           .search-button {
             width: 100%;
             justify-content: center;
+          }
+        }
+
+        @media (max-width: 991px) {
+          .filter-container {
+            padding: 1rem 0.5rem;
           }
         }
 

@@ -29,6 +29,7 @@ function FilterPanel() {
   // ============================================
   const [activeType, setActiveType] = useState("car");
   const { filters, updateFilter, resetFilters } = useFilterState();
+  const [showFuelOptions, setShowFuelOptions] = useState(false);
 
   // ============================================
   // DADOS - Tipos de combustível
@@ -57,22 +58,38 @@ function FilterPanel() {
   // EFFECTS - Reset ao trocar tipo de veículo
   // ============================================
   useEffect(() => {
-    logger.info('Tipo de veículo alterado, resetando filtros', { 
-      previousType: activeType, 
-      newType: activeType 
+    logger.info('Tipo de veículo alterado, resetando filtros', {
+      previousType: activeType,
+      newType: activeType
     });
     resetFilters();
   }, [activeType]);
 
   // ============================================
-  // HANDLERS - Mudança de tipo de veículo
+  // HANDLERS - Mudança de tipo de veículo / Combustível
   // ============================================
   function handleVehicleTypeChange(type) {
-    logger.info('Usuário trocou tipo de veículo', { 
-      from: activeType, 
-      to: type 
+    logger.info('Usuário trocou tipo de veículo', {
+      from: activeType,
+      to: type
     });
     setActiveType(type);
+  }
+
+    function handleSelectFuel(fuel) {
+    logger.info('Combustível selecionado', { fuel });
+    updateFilter("fuel", fuel);
+    setShowFuelOptions(false);
+  }
+
+    function handleFuelFocus() {
+    logger.focus('Campo de combustível focado');
+    setShowFuelOptions(true);
+  }
+
+  function handleFuelBlur() {
+    logger.debug('Campo de combustível perdeu foco');
+    setTimeout(() => setShowFuelOptions(false), 150);
   }
 
   // ============================================
@@ -88,12 +105,12 @@ function FilterPanel() {
   // ============================================
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     logger.group('📋 BUSCA REALIZADA');
     logger.info('Tipo de veículo', { type: activeType });
     logger.info('Filtros aplicados', filters);
-    logger.searchResults('Total de filtros ativos', { 
-      count: Object.keys(filters).filter(key => filters[key]).length 
+    logger.searchResults('Total de filtros ativos', {
+      count: Object.keys(filters).filter(key => filters[key]).length
     });
     logger.groupEnd();
 
@@ -176,6 +193,30 @@ function FilterPanel() {
                             handleUpdateFilter("year", v);
                           }}
                         />
+                      </div>
+
+                      <div className="field fuel">
+                        <input
+                          type="text"
+                          value={filters.fuel || ''}
+                          readOnly
+                          placeholder="Combustível"
+                          onFocus={handleFuelFocus}
+                          onBlur={handleFuelBlur}
+                        />
+                        {showFuelOptions && (
+                          <ul className="fuel-options">
+                            {fuelTypes.map((item, i) => (
+                              <li
+                                key={i}
+                                onClick={() => handleSelectFuel(item.display_name)}
+                                onMouseEnter={() => logger.debug('Hover em opção de combustível', { fuel: item.display_name })}
+                              >
+                                {item.display_name}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </form>
