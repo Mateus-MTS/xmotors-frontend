@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export default function useFilterState() {
   const [filters, setFilters] = useState({
@@ -11,7 +11,7 @@ export default function useFilterState() {
     model: "",
   });
 
-  function resetFilters() {
+  const resetFilters = useCallback(() => {
     setFilters({
       location: "",
       price: [0, 500000],
@@ -21,11 +21,11 @@ export default function useFilterState() {
       color: "",
       model: "",
     });
-  }
+  }, []);
 
-  function updateFilter(field, value) {
+  const updateFilter = useCallback((field, value) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
-  }
+  }, []);
 
   return { filters, updateFilter, resetFilters };
 }

@@ -1,6 +1,4 @@
 // components/GoTopButton.jsx
-import { useState, useEffect } from 'react';
-
 export default function GoTopButton({ visible }) {
   const handleClick = () => {
     window.scrollTo({

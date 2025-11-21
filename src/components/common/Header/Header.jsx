@@ -4,7 +4,7 @@ import useStickyHeader from '../../../hooks/useStickyHeader';
 
 export default function Header({ menuItems }) {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
-  const { isFixed, isSmall, headerRef, spacerRef } = useStickyHeader();
+  const { headerRef } = useStickyHeader();
 
   const toggleMobileMenu = () => {
     setMobileMenuVisible(!mobileMenuVisible);

@@ -120,19 +120,24 @@ export default function useStickySidebar(options = {}) {
 
     resizeObserver.observe(document.body);
 
+    // Capture referências mutáveis para uso no cleanup (evita warnings sobre ref mutável)
+    const capturedTimer = timerRef.current;
+    const capturedObserver = observerRef.current;
+    const capturedSidebar = sidebarRef.current;
+
     // Limpeza
     return () => {
-      if (timerRef.current) {
-        cancelAnimationFrame(timerRef.current);
+      if (capturedTimer) {
+        cancelAnimationFrame(capturedTimer);
       }
       window.removeEventListener('scroll', handleScroll);
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (capturedObserver) {
+        capturedObserver.disconnect();
       }
       resizeObserver.disconnect();
-      
-      // Restaura estilos ao desmontar
-      const innerWrapper = sidebarRef.current?.querySelector(innerWrapperSelector);
+
+      // Restaura estilos ao desmontar usando a referência capturada
+      const innerWrapper = capturedSidebar?.querySelector(innerWrapperSelector);
       if (innerWrapper) {
         innerWrapper.style.position = '';
         innerWrapper.style.top = '';

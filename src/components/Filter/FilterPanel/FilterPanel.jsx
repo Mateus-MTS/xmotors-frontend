@@ -63,7 +63,7 @@ function FilterPanel() {
       newType: activeType
     });
     resetFilters();
-  }, [activeType]);
+  }, [activeType, resetFilters]);
 
   // ============================================
   // HANDLERS - Mudança de tipo de veículo / Combustível

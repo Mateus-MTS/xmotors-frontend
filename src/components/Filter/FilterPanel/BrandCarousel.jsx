@@ -253,7 +253,7 @@ export default function CarBrandFilter(filters) {
   // ESTADOS - Gerenciamento do estado do componente
   // ============================================
   const [selectedBrand, setSelectedBrand] = useState(null); // Inicia sem seleção
-  const [location, setLocation] = useState('');
+  const [location, _setLocation] = useState('');
   const [model, setModel] = useState('');
 
   // ============================================
@@ -268,8 +268,7 @@ export default function CarBrandFilter(filters) {
     const searchData = {
       brand: selectedBrand,
       location,
-      model,
-      fuel
+      model
     };
 
     // Log para debugging e analytics

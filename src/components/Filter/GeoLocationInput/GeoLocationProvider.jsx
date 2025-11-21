@@ -1,29 +1,18 @@
 /**
  * GeoLocationProvider - Provider para compartilhar dados de geolocalização
- * 
+ *
  * Responsabilidades:
  * - Carregar cidades UMA ÚNICA VEZ
  * - Configurar localização inicial UMA ÚNICA VEZ
  * - Fornecer dados para todos os componentes GeoLocationInput
  */
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useBrazilianCities } from './hooks/useBrazilianCities';
 import { useCurrentLocation } from './hooks/useCurrentLocation';
 import logger from '../../../utils/logger';
-
-// Criar o contexto
-const GeoLocationContext = createContext(null);
-
-// Hook para usar o contexto
-export const useGeoLocationContext = () => {
-    const context = useContext(GeoLocationContext);
-    if (!context) {
-        throw new Error('useGeoLocationContext must be used within GeoLocationProvider');
-    }
-    return context;
-};
+import GeoLocationContext from './GeoLocationContext';
 
 // Provider
 export const GeoLocationProvider = ({ children }) => {
@@ -38,17 +27,26 @@ export const GeoLocationProvider = ({ children }) => {
     const {
         getCurrentRegion,
         getCurrentState,
-        setupInitialLocation,
-        isLoadingLocation
-    } = useCurrentLocation(cities);
+        setupInitialLocation
+        } = useCurrentLocation(cities);
 
     // Configurar localização inicial UMA ÚNICA VEZ
     useEffect(() => {
         if (cities && !isInitialized) {
-            logger.dataLoaded('Cidades carregadas no Provider', { count: cities.length });
-            setupInitialLocationAsync();
-        }
-    }, [cities, isInitialized]);
+                logger.dataLoaded('Cidades carregadas no Provider', { count: cities.length });
+                // Chamar setupInitialLocation do hook de localização, definido em useCurrentLocation.
+                // Colocar a função async dentro do effect e incluir setupInitialLocation nas deps para
+                // satisfazer o linter sem criar loops indesejados.
+                (async () => {
+                    const { location } = await setupInitialLocation();
+                    if (location) {
+                        setInitialLocation(location);
+                        logger.info('Localização inicial salva no Provider (não aplicada)', { location });
+                    }
+                    setIsInitialized(true);
+                })();
+            }
+        }, [cities, isInitialized, setupInitialLocation]);
 
     useEffect(() => {
         if (isError) {
@@ -57,19 +55,7 @@ export const GeoLocationProvider = ({ children }) => {
         }
     }, [isError, error]);
 
-    // REMOVER o setState de initialLocation
-    const setupInitialLocationAsync = async () => {
-        const { location, placeholder } = await setupInitialLocation();
-
-        // Apenas guardar a localização, não aplicar
-        if (location) {
-            setInitialLocation(location);
-            // REMOVER: setPlaceholderLocation(placeholder);
-            logger.info('Localização inicial salva no Provider (não aplicada)', { location });
-        }
-
-        setIsInitialized(true);
-    };
+    // Nota: a configuração inicial é feita no useEffect acima (setupInitialLocation é chamado lá)
 
     const value = {
         // Dados compartilhados

@@ -1,45 +1,105 @@
+/**
+ * RangeSlider - Componente de Seleção de Intervalo Numérico
+ * 
+ * Responsabilidades:
+ * - Permitir seleção de intervalos via slider e inputs (preço ou quilometragem)
+ * - Sincronizar valores entre slider e campos de texto
+ * - Validar limites e garantir consistência entre valor mínimo e máximo
+ * - Suporte touch para dispositivos móveis
+ * - Formatação de valores com separadores de milhar
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 import 'nouislider/dist/nouislider.css';
-import useMobileSelectionToggle from '../../../hooks/useMobileSelectionToggle';
+import { useTouchInputPair } from '../../../hooks/useTouchInput';
 
-// Configurações por tipo de campo
+// ============================================
+// CONFIGURAÇÕES POR TIPO DE CAMPO
+// ============================================
+
+/**
+ * Configurações de limites e valores iniciais por tipo de campo
+ */
 const FIELD_CONFIG = {
-  price: { min: 0, max: 1000000, initial: 1000, final: 500000 },
-  km: { min: 0, max: 300000, initial: 0, final: 300000 }
+  price: { 
+    min: 0, 
+    max: 1000000, 
+    initial: 1000, 
+    final: 500000 
+  },
+  km: { 
+    min: 0, 
+    max: 300000, 
+    initial: 0, 
+    final: 300000 
+  }
 };
 
+// ============================================
+// COMPONENTE PRINCIPAL
+// ============================================
+
 const RangeSlider = ({ idField, value, onChange }) => {
+  // ============================================
+  // REFS
+  // ============================================
   const sliderRef = useRef(null);
   const minInputRef = useRef(null);
   const maxInputRef = useRef(null);
 
-  // Busca configuração do campo ou usa padrão
+  // ============================================
+  // CONFIGURAÇÃO E ESTADOS
+  // ============================================
+  
+  // Busca configuração do campo ou usa padrão (price)
   const config = FIELD_CONFIG[idField] || FIELD_CONFIG.price;
   
-  // Estado local
+  // Estado local para valores atuais
   const [localValues, setLocalValues] = useState([config.initial, config.final]);
 
-  useMobileSelectionToggle(minInputRef, maxInputRef);
+  // ============================================
+  // HOOKS CUSTOMIZADOS
+  // ============================================
+  
+  // ⭐ Hook de touch input para pares min/max
+  // Posicionado após refs e estados, antes dos effects
+  useTouchInputPair(minInputRef, maxInputRef, {
+    doubleTapMs: 350 // Tempo para detectar double tap
+  });
 
-  // ⭐ Sincroniza quando valor externo mudar (reset!)
+  // ============================================
+  // EFFECTS - Sincronização e Inicialização
+  // ============================================
+
+  /**
+   * useEffect - Sincroniza valores externos com estado local
+   * Atualiza o slider quando o valor externo muda (ex: reset de filtros)
+   */
   useEffect(() => {
     if (value) {
       setLocalValues(value);
+      
+      // Atualiza slider sem disparar eventos
       if (sliderRef.current?.noUiSlider) {
-        sliderRef.current.noUiSlider.set(value, false); // false = não dispara eventos
+        sliderRef.current.noUiSlider.set(value, false);
       }
     }
   }, [value]);
 
-  // Inicializa o noUiSlider
+  /**
+   * useEffect - Inicialização do slider noUiSlider
+   * Configura o slider e seus event listeners
+   */
   useEffect(() => {
+    // Previne reinicialização se slider já existe
     if (!sliderRef.current || sliderRef.current.noUiSlider) return;
 
     const initialValues = value || [config.initial, config.final];
 
+    // Cria instância do slider
     noUiSlider.create(sliderRef.current, {
       start: initialValues,
       step: 1,
@@ -53,49 +113,61 @@ const RangeSlider = ({ idField, value, onChange }) => {
 
     const slider = sliderRef.current.noUiSlider;
 
-    // ⭐ 'update' apenas para atualizar estado local (visual)
+    // Handler: Atualização contínua enquanto arrasta (apenas visual)
     slider.on('update', (formattedValues) => {
       const parsed = formattedValues.map((val) => Number(val.replace(/,/g, '')));
       setLocalValues(parsed);
     });
 
-    // ⭐ 'change' só dispara quando usuário SOLTA (muito mais performático!)
+    // Handler: Mudança final quando solta o slider (dispara onChange)
+    // Muito mais performático que disparar a cada movimento
     slider.on('change', (formattedValues) => {
       const parsed = formattedValues.map((val) => Number(val.replace(/,/g, '')));
       
-      // Notifica componente pai só quando terminar de arrastar
+      // Notifica componente pai apenas quando terminar de arrastar
       if (onChange) {
         onChange(parsed);
       }
     });
 
+    // Cleanup: Destroi o slider ao desmontar
     return () => {
       if (slider && typeof slider.destroy === 'function') {
         slider.destroy();
       }
     };
-  }, []); // Só cria uma vez
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Handler para input manual
+  // ============================================
+  // HANDLERS - Manipulação de inputs manuais
+  // ============================================
+
+  /**
+   * handleInputChange - Processa mudanças nos campos de texto
+   * @param {number} index - Índice do input (0 = min, 1 = max)
+   * @param {string} rawValue - Valor digitado pelo usuário (pode conter formatação)
+   */
   const handleInputChange = (index, rawValue) => {
-    const val = parseInt(rawValue.replace(/\D/g, '')) || 0;
+    // Remove formatação e converte para número
+    const val = parseInt(rawValue.replace(/\D/g, ''), 10) || 0;
     
-    // Garante que está dentro dos limites
+    // Garante que está dentro dos limites globais
     const clampedVal = Math.max(config.min, Math.min(config.max, val));
     
     const newValues = [...localValues];
     newValues[index] = clampedVal;
     
-    // Garante que min <= max
+    // Garante consistência: min não pode ser maior que max
     if (index === 0 && newValues[0] > newValues[1]) {
       newValues[1] = newValues[0];
     } else if (index === 1 && newValues[1] < newValues[0]) {
       newValues[0] = newValues[1];
     }
     
+    // Atualiza estado local
     setLocalValues(newValues);
     
-    // Atualiza slider
+    // Sincroniza com o slider
     if (sliderRef.current?.noUiSlider) {
       sliderRef.current.noUiSlider.set(newValues);
     }
@@ -106,10 +178,15 @@ const RangeSlider = ({ idField, value, onChange }) => {
     }
   };
 
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <div className="widget widget-price">
+      {/* Campos de input numérico */}
       <div className="slider-labels">
         <div className="number-range">
+          {/* Input: Valor mínimo */}
           <input
             ref={minInputRef}
             type="text"
@@ -117,7 +194,11 @@ const RangeSlider = ({ idField, value, onChange }) => {
             onChange={(e) => handleInputChange(0, e.target.value)}
             aria-label={`Valor mínimo de ${idField}`}
           />
+          
+          {/* Separador visual */}
           <span>–</span>
+          
+          {/* Input: Valor máximo */}
           <input
             ref={maxInputRef}
             type="text"
@@ -128,10 +209,15 @@ const RangeSlider = ({ idField, value, onChange }) => {
         </div>
       </div>
 
+      {/* Slider visual (noUiSlider) */}
       <div id="slider-range" ref={sliderRef}></div>
     </div>
   );
 };
+
+// ============================================
+// PROP TYPES E DEFAULTS
+// ============================================
 
 RangeSlider.propTypes = {
   idField: PropTypes.oneOf(['price', 'km']).isRequired,

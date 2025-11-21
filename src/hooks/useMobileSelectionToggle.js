@@ -47,7 +47,7 @@ export default function useMobileSelectionToggle(minRef, maxRef, options = {}) {
         input.focus();
         const textLength = input.value?.length ?? 0;
         input.setSelectionRange(textLength, textLength);
-      } catch (error) {
+      } catch {
         // Ignora erros silenciosamente
       }
     };
@@ -74,7 +74,7 @@ export default function useMobileSelectionToggle(minRef, maxRef, options = {}) {
             isSelectingAll.current[which] = false;
           }, 100);
         }, 50);
-      } catch (error) {
+      } catch {
         // Ignora erros silenciosamente
       }
     };
@@ -181,6 +181,10 @@ export default function useMobileSelectionToggle(minRef, maxRef, options = {}) {
     attachListeners(minRef, 'min');
     attachListeners(maxRef, 'max');
 
+    // Capture os timers atuais para uso no cleanup (evita warning do linter sobre ref mutável)
+    const capturedTimerMin = timerMin.current;
+    const capturedTimerMax = timerMax.current;
+
     // Cleanup: remove todos os event listeners e limpa timers
     return () => {
       handlers.forEach(({ element, tapHandler, touchStartHandler }) => {
@@ -188,9 +192,9 @@ export default function useMobileSelectionToggle(minRef, maxRef, options = {}) {
         element.removeEventListener('touchend', tapHandler);
         element.removeEventListener('touchstart', touchStartHandler);
       });
-      
-      clearTimeout(timerMin.current);
-      clearTimeout(timerMax.current);
+
+      if (capturedTimerMin) clearTimeout(capturedTimerMin);
+      if (capturedTimerMax) clearTimeout(capturedTimerMax);
     };
   }, [minRef, maxRef, opts.doubleTapMs]); // Dependências do useEffect
 }
