@@ -33,6 +33,7 @@ const GeoLocationInput = ({ value, onChange }) => {
   const [query, setQuery] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [pendingSelectByDDD, setPendingSelectByDDD] = useState(null);
 
   // ============================================
   // REFS
@@ -79,6 +80,11 @@ const GeoLocationInput = ({ value, onChange }) => {
     }
 
     setQuery(newValue);
+    // Se o usuário começar a digitar, garantir que o dropdown de botões feche
+    // e que as sugestões sejam exibidas.
+    if (showOptions) {
+      setShowOptions(false);
+    }
     debouncedSearch(newValue);
 
     if (onChange) {
@@ -90,6 +96,15 @@ const GeoLocationInput = ({ value, onChange }) => {
     logger.focus('Input focado', { query });
 
     if (query === '') {
+      setShowOptions(true);
+    }
+  };
+
+  // Mostrar o dropdown de botões quando o usuário faz mousedown (botão esquerdo)
+  // mesmo que exista texto no input. Digitar no input fechará o dropdown de
+  // botões e exibirá as sugestões.
+  const handleMouseDown = (e) => {
+    if (e && e.button === 0) {
       setShowOptions(true);
     }
   };
@@ -145,6 +160,9 @@ const GeoLocationInput = ({ value, onChange }) => {
   // ============================================
   const handleMyRegion = async () => {
     logger.info('Botão "Minha região" clicado');
+    // Mostrar sugestões (esconder opções de botão). Se encontrarmos DDD,
+    // vamos disparar a busca por DDD e automaticamente selecionar quando o
+    // resultado do DDD estiver disponível.
     setShowOptions(false);
 
     // Buscar o DDD da localização atual
@@ -158,6 +176,8 @@ const GeoLocationInput = ({ value, onChange }) => {
       if (city && city.ddd) {
         const dddQuery = city.ddd;
         setQuery(dddQuery);
+        // Marcar que estamos aguardando seleção automática por esse DDD
+        setPendingSelectByDDD(dddQuery);
         performSearch(dddQuery);
         if (onChange) onChange(dddQuery);
         logger.info('Busca por DDD da região', { ddd: city.ddd });
@@ -172,6 +192,19 @@ const GeoLocationInput = ({ value, onChange }) => {
       if (onChange) onChange(location);
     }
   };
+
+  // Quando as sugestões mudam e temos uma seleção pendente por DDD,
+  // auto-selecionar o item DDD (resumo) assim que aparecer.
+  useEffect(() => {
+    if (!pendingSelectByDDD) return;
+    if (!suggestions || suggestions.length === 0) return;
+
+    const match = suggestions.find(s => s.isDDDSummary || s.isDDD || (s.display_subtitle && s.display_subtitle === pendingSelectByDDD));
+    if (match) {
+      handleSelect(match);
+      setPendingSelectByDDD(null);
+    }
+  }, [suggestions, pendingSelectByDDD]);
 
   const handleMyState = async () => {
     logger.info('Botão "Meu estado" clicado');
@@ -202,6 +235,7 @@ const GeoLocationInput = ({ value, onChange }) => {
         placeholder={isLoading ? 'Carregando cidades...' : 'Busque por DDD, Cidade ou Estado'}
         value={query}
         onChange={handleInputChange}
+        onMouseDown={handleMouseDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
@@ -222,7 +256,10 @@ const GeoLocationInput = ({ value, onChange }) => {
       <SuggestionsList
         suggestions={suggestions}
         onSelect={handleSelect}
-        visible={!showOptions}
+        // Mostrar sugestões sempre que houver resultados; se o usuário
+        // tiver o dropdown de botões aberto e começar a digitar, o
+        // `handleInputChange` fecha esse dropdown e as sugestões aparecem.
+        visible={suggestions && suggestions.length > 0}
       />
 
       {isError && (
