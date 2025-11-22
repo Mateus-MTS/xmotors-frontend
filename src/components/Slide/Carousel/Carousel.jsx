@@ -10,7 +10,7 @@ function Slide() {
         innerWrapperSelector: '.slide-item-content'
     });
 
-    const handleIconClick = (event) => {
+    const handleIconClick = () => {
         setShowContentPrice(!showContentPrice);
     };
     return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function useRangeSlider(config = {}) {
   const {
@@ -16,12 +16,18 @@ export default function useRangeSlider(config = {}) {
   const rangeRef = useRef(null);
   const inputsRef = useRef([]);
   const slidersRef = useRef([]);
+  const valuesRef = useRef(values);
 
   // ⭐ NOVO: Sincroniza com valor externo quando ele mudar (reset!)
+  // Usa um ref para comparar com o último valor aplicado e evitar incluir `values`
+  // nas dependências (o que causaria re-render/desdobramentos indesejados).
+  const prevValuesRef = useRef(values);
+
   useEffect(() => {
-    if (value && (value[0] !== values[0] || value[1] !== values[1])) {
+    const prev = prevValuesRef.current;
+    if (value && (value[0] !== prev[0] || value[1] !== prev[1])) {
       setValues(value);
-      
+
       // Atualiza também os inputs visualmente
       inputsRef.current.forEach((input, idx) => {
         if (input && !isNaN(value[idx])) {
@@ -35,16 +41,20 @@ export default function useRangeSlider(config = {}) {
           slider.value = value[idx];
         }
       });
+
+      prevValuesRef.current = value;
+      valuesRef.current = value;
     }
   }, [value]); // Executa quando value externo mudar
 
   // Função de sincronização com tratamento de erros
-  const syncValues = (newValues) => {
+  const syncValues = useCallback((newValues) => {
     try {
       const [val1, val2] = newValues.map(Number);
       const sorted = [Math.min(val1, val2), Math.max(val1, val2)];
       
-      setValues(sorted);
+  setValues(sorted);
+  valuesRef.current = sorted;
       if (onChange) onChange(sorted); // ⭐ Notifica componente pai
 
       // Atualiza os inputs
@@ -59,9 +69,10 @@ export default function useRangeSlider(config = {}) {
     } catch (error) {
       console.error('Erro no useRangeSlider:', error);
     }
-  };
+  }, [onChange]);
 
   // Configuração dos event listeners
+  // Intencional: os listeners são inicializados apenas quando min/max/step mudam.
   useEffect(() => {
     const parent = rangeRef.current || document.querySelector(rangeSelector);
     if (!parent) return;
@@ -76,15 +87,15 @@ export default function useRangeSlider(config = {}) {
     };
 
     const handleSliderChange = (e, index) => {
-      const newValues = [...values];
-      newValues[index] = parseFloat(e.target.value);
-      syncValues(newValues);
+      const current = Array.from(valuesRef.current);
+      current[index] = parseFloat(e.target.value);
+      syncValues(current);
     };
 
     const handleNumberChange = (e, index) => {
-      const newValues = [...values];
-      newValues[index] = parseFloat(e.target.value) || min;
-      syncValues(newValues);
+      const current = Array.from(valuesRef.current);
+      current[index] = parseFloat(e.target.value) || min;
+      syncValues(current);
     };
 
     // Inicialização
@@ -97,7 +108,7 @@ export default function useRangeSlider(config = {}) {
           slider.min = min;
           slider.max = max;
           slider.step = step;
-          slider.value = values[index];
+          slider.value = valuesRef.current[index];
           slider.addEventListener('input', (e) => handleSliderChange(e, index));
         }
       });
@@ -107,7 +118,7 @@ export default function useRangeSlider(config = {}) {
           input.min = min;
           input.max = max;
           input.step = step;
-          input.value = values[index];
+          input.value = valuesRef.current[index];
           input.addEventListener('input', (e) => handleNumberChange(e, index));
         }
       });
@@ -115,7 +126,7 @@ export default function useRangeSlider(config = {}) {
 
     initSlider();
     return cleanup;
-  }, [min, max, step]); // ⭐ REMOVIDO 'values' daqui pra evitar loop infinito
+  }, [min, max, step, rangeSelector, syncValues]); // Recria listeners quando estes mudam
 
   return {
     values,

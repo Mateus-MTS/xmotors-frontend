@@ -112,7 +112,6 @@ const Listing = () => {
     const [filterType, setFilterType] = useState(FILTER_TYPES.ALL);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageGroupStart, setPageGroupStart] = useState(1);
-    const [viewType, setViewType] = useState('grid');
 
     // Resetar paginação quando o filtro mudar
     useEffect(() => {

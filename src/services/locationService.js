@@ -40,6 +40,86 @@ export const States = [
 ];
 
 export const fetchBrazilianCities = async () => {
+  try {
+    console.log('Iniciando busca de dados do IBGE...');
+    
+    // Buscar todos os dados de uma vez - mais eficiente
+    const [statesResponse, microregionsResponse] = await Promise.all([
+      fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados'),
+      fetch('https://servicodados.ibge.gov.br/api/v1/localidades/microrregioes?view=nivelado')
+    ]);
+    
+    if (!statesResponse.ok || !microregionsResponse.ok) {
+      throw new Error('Erro ao buscar dados do IBGE');
+    }
+    
+    const ufs = await statesResponse.json();
+    const microregionsData = await microregionsResponse.json();
+    
+    // Criar mapa de microrregiões para acesso rápido
+    const microregionMap = {};
+    microregionsData.forEach(item => {
+      if (item['microrregiao-id']) {
+        microregionMap[item['microrregiao-id']] = {
+          microregionName: item['microrregiao-nome'],
+          microregionCode: item['microrregiao-id'],
+          mesoregionName: item['mesorregiao-nome'],
+          mesoregionCode: item['mesorregiao-id'],
+          uf: item['UF-sigla']
+        };
+      }
+    });
+    
+    const allCities = [];
+    
+    // Buscar cidades por estado
+    for (const uf of ufs) {
+      console.log(`Processando ${uf.sigla}...`);
+      
+      const citiesResponse = await fetch(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf.sigla}/municipios`
+      );
+      
+      if (!citiesResponse.ok) {
+        console.warn(`Erro ao buscar cidades de ${uf.sigla}`);
+        continue;
+      }
+      
+      const cities = await citiesResponse.json();
+      
+      cities.forEach(city => {
+        // ✅ CORREÇÃO: Verificar se microrregiao e id existem
+        const microregionId = city.microrregiao?.id;
+        const microregionInfo = microregionId ? microregionMap[microregionId] : null;
+        
+        allCities.push({
+          id: city.id,
+          name: city.nome,
+          state: uf.sigla,
+          stateFullName: uf.nome,
+          display_name: `${city.nome}, ${uf.sigla}`,
+          microregion: microregionInfo?.microregionName || city.microrregiao?.nome || 'Não informada',
+          microregionCode: microregionInfo?.microregionCode || city.microrregiao?.id || null,
+          mesoregion: microregionInfo?.mesoregionName || city.microrregiao?.mesorregiao?.nome || 'Não informada',
+          mesoregionCode: microregionInfo?.mesoregionCode || city.microrregiao?.mesorregiao?.id || null
+        });
+      });
+    }
+    
+    console.log(`Busca concluída! ${allCities.length} cidades processadas.`);
+    return allCities;
+    
+  } catch (error) {
+    console.error('Erro na busca de cidades:', error);
+    
+    // Fallback: usar a implementação original se a nova falhar
+    console.log('Tentando fallback para API básica...');
+    return await fetchBrazilianCitiesFallback();
+  }
+};
+
+// Fallback mantendo sua implementação original
+const fetchBrazilianCitiesFallback = async () => {
   const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
   
   if (!response.ok) {
@@ -62,14 +142,15 @@ export const fetchBrazilianCities = async () => {
     const cities = await citiesResponse.json();
     
     cities.forEach(city => {
+      // ✅ CORREÇÃO: Verificar se os dados existem antes de acessar
       allCities.push({
         id: city.id,
         name: city.nome,
         state: uf.sigla,
         stateFullName: uf.nome,
         display_name: `${city.nome}, ${uf.sigla}`,
-        microrregion: city.microrregiao?.nome,
-        mesorregion: city.mesorregiao?.nome
+        microregion: city.microrregiao?.nome || 'Não informada',
+        mesoregion: city.mesorregiao?.nome || 'Não informada'
       });
     });
   }
@@ -77,7 +158,7 @@ export const fetchBrazilianCities = async () => {
   return allCities;
 };
 
-// ⭐ Busca cidades por DDD com informações de região
+// ⭐ Busca cidades por DDD com informações de região (ATUALIZADA)
 export const fetchCitiesByDDD = async (ddd) => {
   try {
     const response = await fetch(`https://brasilapi.com.br/api/ddd/v1/${ddd}`);
@@ -98,11 +179,17 @@ export const fetchCitiesByDDD = async (ddd) => {
       state: data.state,
       ddd: ddd,
       region: dddInfo?.region || 'Região',
+      mesoregion: dddInfo?.mesoregion || 'Mesorregião',
+      mesoregionCode: dddInfo?.mesoregionCode,
+      microregion: dddInfo?.microregion || 'Microrregião', 
+      microregionCode: dddInfo?.microregionCode,
       cities: sortedCities.map(cityName => ({
         name: cityName,
         state: data.state,
         ddd: ddd,
         region: dddInfo?.region || 'Região',
+        mesoregion: dddInfo?.mesoregion,
+        microregion: dddInfo?.microregion,
         display_name: cityName,
         display_subtitle: `DDD ${ddd} - ${dddInfo?.region || 'Região'}`,
         isDDD: true
@@ -111,6 +198,28 @@ export const fetchCitiesByDDD = async (ddd) => {
   } catch (error) {
     console.error(`Erro ao buscar DDD ${ddd}:`, error);
     return null;
+  }
+};
+
+// ⭐ NOVA FUNÇÃO: Buscar cidades por mesorregião
+export const fetchCitiesByMesoregion = async (mesoregionCode) => {
+  try {
+    const cities = await fetchBrazilianCities();
+    return cities.filter(city => city.mesoregionCode === mesoregionCode);
+  } catch (error) {
+    console.error(`Erro ao buscar cidades da mesorregião ${mesoregionCode}:`, error);
+    return [];
+  }
+};
+
+// ⭐ NOVA FUNÇÃO: Buscar cidades por microrregião  
+export const fetchCitiesByMicroregion = async (microregionCode) => {
+  try {
+    const cities = await fetchBrazilianCities();
+    return cities.filter(city => city.microregionCode === microregionCode);
+  } catch (error) {
+    console.error(`Erro ao buscar cidades da microrregião ${microregionCode}:`, error);
+    return [];
   }
 };
 

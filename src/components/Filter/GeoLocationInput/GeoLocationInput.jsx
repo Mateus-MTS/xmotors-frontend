@@ -7,11 +7,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from '../../../utils/utils';
-import { useGeoLocationContext } from './GeoLocationProvider';
+import { useGeoLocationContext } from './GeoLocationContext';
 import { useGeoLocationSearch } from './hooks/useGeoLocationSearch';
 import LocationOptions from './components/LocationOptions';
 import SuggestionsList from './components/SuggestionsList';
 import logger from '../../../utils/logger';
+import useTouchInput from '../../../hooks/useTouchInput';
 
 const GeoLocationInput = ({ value, onChange }) => {
   // ============================================
@@ -21,9 +22,7 @@ const GeoLocationInput = ({ value, onChange }) => {
     cities,
     isLoading,
     isError,
-    placeholderLocation: contextPlaceholder,
     initialLocation,
-    isInitialized,
     getCurrentRegion,
     getCurrentState
   } = useGeoLocationContext();
@@ -36,6 +35,11 @@ const GeoLocationInput = ({ value, onChange }) => {
   const [hasInitialized, setHasInitialized] = useState(false);
 
   // ============================================
+  // REFS
+  // ============================================
+  const inputRef = useRef();
+
+  // ============================================
   // HOOKS CUSTOMIZADOS
   // ============================================
   const {
@@ -45,10 +49,9 @@ const GeoLocationInput = ({ value, onChange }) => {
     clearSuggestions
   } = useGeoLocationSearch(cities);
 
-  // ============================================
-  // REFS
-  // ============================================
-  const inputRef = useRef();
+  // ⭐ HOOK DE TOUCH INPUT - Chamado após refs e antes dos effects
+  // Posição ideal: depois de todas as refs estarem criadas
+  useTouchInput(inputRef, { doubleTapMs: 350 });
 
   // Debounce criado uma vez só
   const debouncedSearch = useRef(
@@ -92,7 +95,7 @@ const GeoLocationInput = ({ value, onChange }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.ukey === 'Enter') {
       e.preventDefault();
       clearSuggestions();
       setShowOptions(false);
@@ -121,7 +124,7 @@ const GeoLocationInput = ({ value, onChange }) => {
 
     // Tratamento especial para resumo de DDD
     if (item.isDDDSummary) {
-      displayValue = `${item.display_name} - DDD ${item.ddd}`;
+      displayValue = `${item.display_subtitle}`;
     } else if (item.isDDD) {
       displayValue = `${item.display_name}, ${item.state}`;
     } else {

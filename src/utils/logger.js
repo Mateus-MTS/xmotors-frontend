@@ -19,7 +19,8 @@ class Logger {
   constructor() {
     // Configuração: mude para LOG_LEVELS.NONE em produção
     this.level = LOG_LEVELS.DEBUG;
-    this.enabled = process.env.NODE_ENV !== 'production';
+    // `process` pode não existir no ambiente do browser; checar de forma segura via globalThis
+    this.enabled = (typeof globalThis !== 'undefined' && typeof globalThis.process !== 'undefined' && globalThis.process && globalThis.process.env && globalThis.process.env.NODE_ENV !== 'production');
   }
 
   /**
